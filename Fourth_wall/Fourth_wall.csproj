@@ -52,6 +52,11 @@
     <Compile Include="Forms\Main Menu.Designer.cs">
       <DependentUpon>Main Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game Objects\Chest.cs" />
+    <Compile Include="Game Objects\DestructibleObject.cs" />
+    <Compile Include="Game Objects\Enemy.cs" />
+    <Compile Include="Game Objects\Hero.cs" />
+    <Compile Include="Game Objects\Wall.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Program.cs" />
@@ -79,7 +84,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game Objects" />
     <Folder Include="Locations" />
     <Folder Include="Resources" />
   </ItemGroup>

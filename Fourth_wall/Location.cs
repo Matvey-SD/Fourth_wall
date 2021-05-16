@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using Fourth_wall.Game_Objects;
 
 namespace Fourth_wall
 {
     public class Location
     {
-        /*public readonly List<Enemy> Enemies;
+        public readonly List<Enemy> Enemies;
         public readonly List<Wall> Walls;
-        public readonly List<DestructibleObject> DestructibleObjects;
+        public readonly List<DestructibleObject> DestructibleObject;
         public readonly Chest Chest;
         public readonly Point HeroLocation;
 
@@ -15,9 +16,9 @@ namespace Fourth_wall
         {
             Enemies = enemies;
             Walls = walls;
-            DestructibleObjects = destructibleObjects;
+            DestructibleObject = destructibleObjects;
             HeroLocation = heroLocation;
             Chest = chest;
-        }*/
+        }
     }
 }
