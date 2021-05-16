@@ -15,12 +15,10 @@ namespace Fourth_wall
     {
         private Bitmap GetFormBackgroundImage()
         {
-            Bitmap bmp = new Bitmap(this.ClientSize.Width, this.ClientSize.Height);
+            Bitmap bmp = new Bitmap(ClientSize.Width, ClientSize.Height);
             using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.DrawImage(this.BackgroundImage,
+                g.DrawImage(BackgroundImage,
                     new Rectangle(0, 0, bmp.Width, bmp.Height));
-            }
             return bmp;
         }
         public MainMenu()
@@ -35,16 +33,26 @@ namespace Fourth_wall
             {
                 Size = new Size(300, 60),
                 Text = Resources.MainMenu_Exit,
+                Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(exitButton);
+            var startButton = new Button()
+            {
+                Size = new Size(300, 60),
+                Text = Resources.MainMenu_Start,
+                Font = new Font(Font.FontFamily, 20)
+            };
+            Controls.Add(startButton);
 
             exitButton.Click += (sender, args) =>
                 Close();
             
             SizeChanged += (sender, args) =>
             {
+                startButton.Location = new Point(ClientSize.Width / 2 - startButton.Size.Width / 2,
+                    ClientSize.Height / 2);
                 exitButton.Location = new Point(ClientSize.Width / 2 - exitButton.Size.Width / 2, 
-                    2*ClientSize.Height / 3 );
+                    startButton.Bottom + ClientSize.Height / 20 );
                 BackgroundImage = GetFormBackgroundImage();
             };
 

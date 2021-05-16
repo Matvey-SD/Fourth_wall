@@ -87,5 +87,14 @@ namespace Fourth_wall.Properties {
                 return ResourceManager.GetString("MainMenu_On_Exit", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Начать игру.
+        /// </summary>
+        internal static string MainMenu_Start {
+            get {
+                return ResourceManager.GetString("MainMenu_Start", resourceCulture);
+            }
+        }
     }
 }

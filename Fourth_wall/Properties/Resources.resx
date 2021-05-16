@@ -127,4 +127,7 @@
   <data name="MainMenu_Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
+  <data name="MainMenu_Start" xml:space="preserve">
+    <value>Начать игру</value>
+  </data>
 </root>
