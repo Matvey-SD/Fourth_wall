@@ -1,0 +1,9 @@
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\bin\Debug\Fourth_wall.exe.config
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\bin\Debug\Fourth_wall.exe
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\bin\Debug\Fourth_wall.pdb
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.csprojAssemblyReference.cache
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.Properties.Resources.resources
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.csproj.GenerateResource.cache
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.csproj.CoreCompileInputs.cache
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.exe
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.pdb
