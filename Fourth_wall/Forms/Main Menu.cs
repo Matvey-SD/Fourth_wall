@@ -28,6 +28,10 @@ namespace Fourth_wall
             BackgroundImage = Resources.Background;
             FormBorderStyle = FormBorderStyle.None;
             Text = "4-th Wall";
+            var rnd = new Random();
+
+            var userName = Environment.UserName;
+            var exitCounter = 0;
 
             var exitButton = new Button()
             {
@@ -39,7 +43,7 @@ namespace Fourth_wall
             var startButton = new Button()
             {
                 Size = new Size(300, 60),
-                Text = Resources.MainMenu_Start,
+                Text = Resources.MainMenu_Start + userName + "?",
                 Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(startButton);
@@ -62,6 +66,15 @@ namespace Fourth_wall
                     MessageBoxIcon.Question);
                 if (result != DialogResult.Yes)
                     eventArgs.Cancel = true;
+            };
+            
+            FormClosed += (sender, args) =>
+            {
+                var message = MessageBox.Show(
+                    Resources.Error_Text_1 + (exitCounter*10 + rnd.Next(9)).ToString() + Resources.Error_Text_2, "", 
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                if (exitCounter++ < 10) OnFormClosed(new FormClosedEventArgs(CloseReason.UserClosing));
             };
             
             Load += (sender, args) => OnSizeChanged(EventArgs.Empty);

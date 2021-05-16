@@ -122,12 +122,18 @@
     <value>..\Resources\Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MainMenu_On_Exit" xml:space="preserve">
-    <value>Вы уверены, что хотите выйти</value>
+    <value>Вы пожалеете, уверены?</value>
   </data>
   <data name="MainMenu_Exit" xml:space="preserve">
     <value>Выход</value>
   </data>
   <data name="MainMenu_Start" xml:space="preserve">
-    <value>Начать игру</value>
+    <value>Сыграем, </value>
+  </data>
+  <data name="Error_Text_1" xml:space="preserve">
+    <value>На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем некоторые сведения об ошибке, а затем будет автоматичесски выполнена перезашрузка. (выполнено: </value>
+  </data>
+  <data name="Error_Text_2" xml:space="preserve">
+    <value>%)</value>
   </data>
 </root>

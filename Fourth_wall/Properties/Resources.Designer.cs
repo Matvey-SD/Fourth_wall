@@ -71,6 +71,24 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем некоторые сведения об ошибке, а затем будет автоматичесски выполнена перезашрузка. (выполнено: .
+        /// </summary>
+        internal static string Error_Text_1 {
+            get {
+                return ResourceManager.GetString("Error_Text_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %).
+        /// </summary>
+        internal static string Error_Text_2 {
+            get {
+                return ResourceManager.GetString("Error_Text_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выход.
         /// </summary>
         internal static string MainMenu_Exit {
@@ -80,7 +98,7 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы уверены, что хотите выйти.
+        ///   Looks up a localized string similar to Вы пожалеете, уверены?.
         /// </summary>
         internal static string MainMenu_On_Exit {
             get {
@@ -89,7 +107,7 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Начать игру.
+        ///   Looks up a localized string similar to Сыграем, .
         /// </summary>
         internal static string MainMenu_Start {
             get {
