@@ -98,7 +98,7 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы пожалеете, уверены?.
+        ///   Looks up a localized string similar to Вы точно уверены?.
         /// </summary>
         internal static string MainMenu_On_Exit {
             get {

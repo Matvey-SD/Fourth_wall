@@ -8,21 +8,27 @@ namespace Fourth_wall.Game_Objects
     {
         private int _maxHp;
         private int _hp;
+        private int _damage;
+        private int _damageBoost;
         public readonly List<Image> Texture;
         
         #region Constructor
-        public Hero(Point location, int hp, List<Image> texture, int maxHp) : base(location)
+        public Hero(Point location, int hp, List<Image> texture, int maxHp, int damage) : base(location)
         {
             _hp = hp;
             Texture = texture;
             _maxHp = maxHp;
+            _damage = damage;
+            _damageBoost = 0;
         }
 
-        public Hero(int x, int y, int hp, List<Image> texture, int maxHp) : base(x, y)
+        public Hero(int x, int y, int hp, List<Image> texture, int maxHp, int damage) : base(x, y)
         {
             _hp = hp;
             Texture = texture;
             _maxHp = maxHp;
+            _damage = damage;
+            _damageBoost = 0;
         }
         #endregion
 

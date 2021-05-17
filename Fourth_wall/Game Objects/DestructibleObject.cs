@@ -25,7 +25,6 @@ namespace Fourth_wall.Game_Objects
         }
         #endregion
         
-
         public void HPChange(int hp)
         {
             _hp -= hp;
