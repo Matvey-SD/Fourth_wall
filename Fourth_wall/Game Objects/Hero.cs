@@ -50,5 +50,10 @@ namespace Fourth_wall.Game_Objects
         {
             throw new NotImplementedException();
         }
+
+        public int FullDamage()
+        {
+            return _damage + _damageBoost;
+        }
     }
 }

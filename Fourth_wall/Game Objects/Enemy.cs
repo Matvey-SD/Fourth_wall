@@ -34,9 +34,9 @@ namespace Fourth_wall.Game_Objects
             return _isTriggered;
         }
         
-        public void HPChange(int hp)
+        public void TakeDamage(Hero hero)
         {
-            _hp -= hp;
+            _hp -= hero.FullDamage();
             if (_hp <= 0)
                 Die();
         }
