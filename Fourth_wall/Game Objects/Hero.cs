@@ -10,29 +10,51 @@ namespace Fourth_wall.Game_Objects
         private int _hp;
         private int _damage;
         private int _damageBoost;
+        private int _range;
         public readonly List<Image> Texture;
         
         #region Constructor
-        public Hero(Point location, int hp, List<Image> texture, int maxHp, int damage) : base(location)
+        public Hero(Point location, int hp, List<Image> texture, int damage, int range) : base(location)
         {
             _hp = hp;
             Texture = texture;
-            _maxHp = maxHp;
             _damage = damage;
+            _range = range;
             _damageBoost = 0;
+            _maxHp = 6;
         }
 
-        public Hero(int x, int y, int hp, List<Image> texture, int maxHp, int damage) : base(x, y)
+        public Hero(int x, int y, int hp, List<Image> texture, int damage, int range) : base(x, y)
         {
             _hp = hp;
             Texture = texture;
-            _maxHp = maxHp;
             _damage = damage;
+            _range = range;
             _damageBoost = 0;
+            _maxHp = 6;
         }
         #endregion
 
         public int Hp => _hp;
+
+        public void Hit(Location level)
+        {
+            foreach (var destructObj in level.DestructibleObjects)
+            {
+                var x = Location.X - destructObj.Location.X;
+                var y = Location.Y - destructObj.Location.Y;
+                if (Math.Sqrt(x * x + y * y) <= _range) 
+                    destructObj.HpChange(FullDamage());
+            }
+
+            foreach (var enemy in level.Enemies)
+            {
+                var x = Location.X - enemy.Location.X;
+                var y = Location.Y - enemy.Location.Y;
+                if (Math.Sqrt(x * x + y * y) <= _range) 
+                    enemy.HpChange(FullDamage());
+            }
+        }
 
         public void HpRemove()
         {
@@ -51,7 +73,7 @@ namespace Fourth_wall.Game_Objects
             throw new NotImplementedException();
         }
 
-        public int FullDamage()
+        private int FullDamage()
         {
             return _damage + _damageBoost;
         }

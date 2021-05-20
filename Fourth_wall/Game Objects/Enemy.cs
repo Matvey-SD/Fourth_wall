@@ -12,13 +12,13 @@ namespace Fourth_wall.Game_Objects
         public bool _isTriggered = false;
 
         #region Constructor
-        public Enemy(Point location, int damage, int hp, List<Image> texture) : base(location)
+        public Enemy(Point location, int hp, List<Image> texture) : base(location)
         {
             _hp = hp;
             Texture = texture;
         }
 
-        public Enemy(int x, int y, int damage, int hp, List<Image> texture) : base(x, y)
+        public Enemy(int x, int y, int hp, List<Image> texture) : base(x, y)
         {
             _hp = hp;
             Texture = texture;
@@ -34,9 +34,9 @@ namespace Fourth_wall.Game_Objects
             return _isTriggered;
         }
         
-        public void TakeDamage(Hero hero)
+        public void HpChange(int hp)
         {
-            _hp -= hero.FullDamage();
+            _hp -= hp;
             if (_hp <= 0)
                 Die();
         }

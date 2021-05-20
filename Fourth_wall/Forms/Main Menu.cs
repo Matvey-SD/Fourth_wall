@@ -11,7 +11,7 @@ using Fourth_wall.Properties;
 
 namespace Fourth_wall
 {
-    public partial class MainMenu : Form
+    public partial class MainMenu : UserControl
     {
         private Bitmap GetFormBackgroundImage()
         {
@@ -24,9 +24,9 @@ namespace Fourth_wall
         public MainMenu()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Maximized;
+            //WindowState = FormWindowState.Maximized;
             BackgroundImage = Resources.Background;
-            FormBorderStyle = FormBorderStyle.None;
+            //FormBorderStyle = FormBorderStyle.None;
             Text = "4-th Wall";
             var rnd = new Random();
 
@@ -40,6 +40,9 @@ namespace Fourth_wall
                 Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(exitButton);
+            //exitButton.Click += (sender, args) =>
+            //    MainForm.Close();
+            
             var startButton = new Button()
             {
                 Size = new Size(300, 60),
@@ -47,9 +50,12 @@ namespace Fourth_wall
                 Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(startButton);
-
-            exitButton.Click += (sender, args) =>
-                Close();
+            startButton.Click += (sender, args) =>
+            {
+                Hide();
+                new GameStage(Locations.CreateFirstLocation()).Show();
+            };
+                
             
             SizeChanged += (sender, args) =>
             {
@@ -60,7 +66,7 @@ namespace Fourth_wall
                 BackgroundImage = GetFormBackgroundImage();
             };
 
-            FormClosing += (sender, eventArgs) =>
+            /*FormClosing += (sender, eventArgs) =>
             {
                 var result = MessageBox.Show(Resources.MainMenu_On_Exit, "", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -75,7 +81,7 @@ namespace Fourth_wall
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 if (exitCounter++ < 10) OnFormClosed(new FormClosedEventArgs(CloseReason.UserClosing));
-            };
+            };*/
             
             Load += (sender, args) => OnSizeChanged(EventArgs.Empty);
         }
