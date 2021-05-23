@@ -6,13 +6,14 @@ namespace Fourth_wall
 {
     public class Location
     {
-        public readonly List<Enemy> Enemies;
-        public readonly List<Wall> Walls;
-        public readonly List<DestructibleObject> DestructibleObjects;
+        public readonly IEnumerable<Enemy> Enemies;
+        public readonly IEnumerable<Wall> Walls;
+        public readonly IEnumerable<DestructibleObject> DestructibleObjects;
         public readonly Chest Chest;
         public readonly Hero Hero;
 
-        public Location(List<Enemy> enemies, List<Wall> walls, List<DestructibleObject> destructibleObjectses, Chest chest, Hero hero)
+        public Location(IEnumerable<Enemy> enemies, IEnumerable<Wall> walls, 
+            IEnumerable<DestructibleObject> destructibleObjectses, Chest chest, Hero hero)
         {
             Enemies = enemies;
             Walls = walls;
