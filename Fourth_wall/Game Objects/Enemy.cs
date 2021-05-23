@@ -8,17 +8,18 @@ namespace Fourth_wall.Game_Objects
     {
         private int _hp;
         private readonly int _fov = 1000;
-        public readonly List<Image> Texture;
-        public bool _isTriggered = false;
+        public readonly IEnumerable<Image> Texture;
+        public bool IsTriggered { get; private set; } = false;
+        public bool IsDead { get; private set; } = false;
 
         #region Constructor
-        public Enemy(Point location, int hp, List<Image> texture) : base(location)
+        public Enemy(Point location, int hp, IEnumerable<Image> texture) : base(location)
         {
             _hp = hp;
             Texture = texture;
         }
 
-        public Enemy(int x, int y, int hp, List<Image> texture) : base(x, y)
+        public Enemy(int x, int y, int hp, IEnumerable<Image> texture) : base(x, y)
         {
             _hp = hp;
             Texture = texture;
@@ -27,11 +28,14 @@ namespace Fourth_wall.Game_Objects
 
         public bool IsHeroDetected(Hero hero)
         {
-            var x = hero.Location.X - Location.X;
-            var y = hero.Location.Y - Location.Y;
-            if (Math.Sqrt(x * x + y * y) <= _fov) 
-                _isTriggered = true;
-            return _isTriggered;
+            if (!IsDead)
+            {
+                var x = hero.Location.X - Location.X;
+                var y = hero.Location.Y - Location.Y;
+                if (Math.Sqrt(x * x + y * y) <= _fov) 
+                    IsTriggered = true;
+            }
+            return IsTriggered;
         }
         
         public void HpChange(int hp)
@@ -41,9 +45,25 @@ namespace Fourth_wall.Game_Objects
                 Die();
         }
 
-        private void Die()
+        private void Die() => IsDead = true;
+
+        public void Move(Directions direction)
         {
-            throw new NotImplementedException();
+            switch (direction)
+            {
+                case Directions.Down:
+                    ChangeLocation(0, 1);
+                    break;
+                case Directions.Up:
+                    ChangeLocation(0, -1);
+                    break;
+                case Directions.Left:
+                    ChangeLocation(-1, 0);
+                    break;
+                case Directions.Right:
+                    ChangeLocation(1, 0);
+                    break;
+            }
         }
     }
 }

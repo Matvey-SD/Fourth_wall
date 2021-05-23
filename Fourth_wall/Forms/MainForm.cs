@@ -11,12 +11,10 @@ namespace Fourth_wall
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
-            var mainMenu = new MainMenu();
-            Controls.Add(mainMenu);
+            //var mainMenu = new MainMenu();
+            //Controls.Add(mainMenu);
             ShowMainMenu();
-
-            var rnd = new Random();
-            var exitCounter = 0;
+            
             FormClosing += (sender, eventArgs) =>
             {
                 var result = MessageBox.Show(Resources.MainMenu_On_Exit, "", MessageBoxButtons.YesNo,
@@ -25,19 +23,23 @@ namespace Fourth_wall
                     eventArgs.Cancel = true;
             };
             
+            /*var rnd = new Random();
+            var exitCounter = 0;
+            
             FormClosed += (sender, args) =>
             {
                 var message = MessageBox.Show(
-                    Resources.Error_Text_1 + (exitCounter*10 + rnd.Next(9)).ToString() + Resources.Error_Text_2, "", 
+                    Resources.Error_Text_1 + (exitCounter*25 + rnd.Next(9)).ToString() + Resources.Error_Text_2, "", 
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                if (exitCounter++ < 10) OnFormClosed(new FormClosedEventArgs(CloseReason.UserClosing));
-            };
+                if (exitCounter++ < 4) OnFormClosed(new FormClosedEventArgs(CloseReason.UserClosing));
+            };*/
         }
 
         private void HideScreens()
         {
             _mainMenu.Hide();
+            _gameStage.Hide();
         }
         
         private void ShowMainMenu()

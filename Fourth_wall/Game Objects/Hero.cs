@@ -7,16 +7,16 @@ namespace Fourth_wall.Game_Objects
     public class Hero : GameObject
     {
         private int _maxHp;
-        private int _hp;
+        public int Hp { get; private set; }
         private int _damage;
         private int _damageBoost;
         private int _range;
-        public readonly List<Image> Texture;
+        public readonly IEnumerable<Image> Texture;
         
         #region Constructor
-        public Hero(Point location, int hp, List<Image> texture, int damage, int range) : base(location)
+        public Hero(Point location, int hp, IEnumerable<Image> texture, int damage, int range) : base(location)
         {
-            _hp = hp;
+            Hp = hp;
             Texture = texture;
             _damage = damage;
             _range = range;
@@ -24,9 +24,9 @@ namespace Fourth_wall.Game_Objects
             _maxHp = 6;
         }
 
-        public Hero(int x, int y, int hp, List<Image> texture, int damage, int range) : base(x, y)
+        public Hero(int x, int y, int hp, IEnumerable<Image> texture, int damage, int range) : base(x, y)
         {
-            _hp = hp;
+            Hp = hp;
             Texture = texture;
             _damage = damage;
             _range = range;
@@ -34,8 +34,6 @@ namespace Fourth_wall.Game_Objects
             _maxHp = 6;
         }
         #endregion
-
-        public int Hp => _hp;
 
         public void Hit(Location level)
         {
@@ -55,27 +53,46 @@ namespace Fourth_wall.Game_Objects
                     enemy.HpChange(FullDamage());
             }
         }
+        
+        public void Move(Directions direction)
+        {
+            switch (direction)
+            {
+                case Directions.Down:
+                    ChangeLocation(0, 1);
+                    break;
+                case Directions.Up:
+                    ChangeLocation(0, -1);
+                    break;
+                case Directions.Left:
+                    ChangeLocation(-1, 0);
+                    break;
+                case Directions.Right:
+                    ChangeLocation(1, 0);
+                    break;
+            }
+        }
 
         public void HpRemove()
         {
-            if (--_hp <= 0)
+            if (--Hp <= 0)
                 Die();
             
         }
 
         public void AddHp()
         {
-            if (_hp < _maxHp)
-                _hp++;
+            if (Hp < _maxHp)
+                Hp++;
+        }
+        
+        private int FullDamage()
+        {
+            return _damage + _damageBoost;
         }
         private void Die()
         {
             throw new NotImplementedException();
-        }
-
-        private int FullDamage()
-        {
-            return _damage + _damageBoost;
         }
     }
 }

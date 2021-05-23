@@ -20,7 +20,7 @@ namespace Fourth_wall
             _location = new Point(x, y);
         }
         #endregion
-        
+
         public void ChangeLocation(Point dPoint)
         {
             _location = new Point(_location.X + dPoint.X, _location.Y + dPoint.Y);

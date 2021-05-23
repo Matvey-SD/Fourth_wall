@@ -8,6 +8,7 @@ namespace Fourth_wall.Game_Objects
         private int _hp;
         public readonly Size Collider;
         public readonly Image Texture;
+        public bool IsDestroyed { get; private set; } = false;
 
         #region Constructor
         public DestructibleObject(Point location, int hp, Size collider, Image texture) : base(location)
@@ -25,6 +26,18 @@ namespace Fourth_wall.Game_Objects
         }
         #endregion
         
+        public Point OppositeCorner()
+        {
+            return new Point(Location.X + Collider.Height, Location.Y + Collider.Width);
+        }
+        
+        public bool IsPointInside(Point point)
+        {
+            return (point.X > Location.X && point.X < OppositeCorner().X
+                                         && point.Y > Location.Y && point.Y < OppositeCorner().Y);
+
+        }
+        
         public void HpChange(int hp)
         {
             _hp -= hp;
@@ -34,7 +47,7 @@ namespace Fourth_wall.Game_Objects
 
         private void Die()
         {
-            throw new NotImplementedException();
+            IsDestroyed = true;
         }
     }
 }

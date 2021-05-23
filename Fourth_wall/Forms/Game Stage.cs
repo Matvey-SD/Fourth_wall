@@ -18,16 +18,16 @@ namespace Fourth_wall
             switch (e.KeyChar)
             {
                 case 'w' :
-                    location.Hero.ChangeLocation(0, -2);
+                    location.TryMoveHero(Directions.Up);
                     break;
                 case 's' :
-                    location.Hero.ChangeLocation(0, 2);
+                    location.TryMoveHero(Directions.Down);
                     break;
                 case 'd' :
-                    location.Hero.ChangeLocation(2, 0);
+                    location.TryMoveHero(Directions.Right);   
                     break;
                 case 'a' :
-                    location.Hero.ChangeLocation(-2, 0);
+                    location.TryMoveHero(Directions.Left);
                     break;
             }
         }

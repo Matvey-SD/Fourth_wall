@@ -35,10 +35,13 @@ namespace Fourth_wall
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Text = "MainForm";
+            this.Controls.Add(_mainMenu);
+            this.Controls.Add(_gameStage);
         }
 
         #endregion
-        
+
         private MainMenu _mainMenu;
+        private GameStage _gameStage;
     }
 }
