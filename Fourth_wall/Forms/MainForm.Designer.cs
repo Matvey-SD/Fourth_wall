@@ -41,7 +41,7 @@ namespace Fourth_wall
 
         #endregion
 
-        private MainMenu _mainMenu;
-        private GameStage _gameStage;
+        private MainMenu _mainMenu = new MainMenu();
+        private GameStage _gameStage = new GameStage(Locations.CreateFirstLocation());
     }
 }

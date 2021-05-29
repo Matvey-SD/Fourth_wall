@@ -11,7 +11,22 @@ namespace Fourth_wall
         public readonly IEnumerable<DestructibleObject> DestructibleObjects;
         public readonly Chest Chest;
         public readonly Hero Hero;
-        public readonly Size Size = new Size(1000, 563);
+        public readonly Size Size = new Size(500, 300);
+        public bool IsAllEnemiesDead
+        {
+            get
+            {
+                foreach (var enemy in Enemies)
+                {
+                    if (!enemy.IsDead)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
 
         public Location(IEnumerable<Enemy> enemies, IEnumerable<Wall> walls, 
             IEnumerable<DestructibleObject> destructibleObjectses, Chest chest, Hero hero)
@@ -30,11 +45,6 @@ namespace Fourth_wall
                     TryMoveEnemy(enemy);
         }
 
-        public void TryMoveHero(Directions direction)
-        {
-            if (IsThereSpaceToMove(direction, Hero)) Hero.Move(direction);
-        }
-
         private void TryMoveEnemy(Enemy enemy)
         {
             if (!enemy.IsDead && enemy.IsTriggered)
@@ -51,6 +61,11 @@ namespace Fourth_wall
                 if (enemy.Location.Y > Hero.Location.Y && IsThereSpaceToMove(Directions.Down, enemy)) 
                     enemy.Move(Directions.Down);
             }
+        }
+        
+        public void TryMoveHero(Directions direction)
+        {
+            if (IsThereSpaceToMove(direction, Hero)) Hero.Move(direction);
         }
 
         private bool IsThereSpaceToMove(Directions direction, GameObject target)
@@ -86,6 +101,35 @@ namespace Fourth_wall
 
             return true;
         }
+
+        public void EnemiesSearchForHero()
+        {
+            foreach (var enemy in Enemies)
+            {
+                enemy.HeroSearch(Hero);
+            }
+        }
+
+        public void EnemiesAttackHero()
+        {
+            foreach (var enemy in Enemies)
+            {
+                enemy.AttackHero(Hero);
+            }
+        }
+
+        /*public bool IsAllEnemiesDead()
+        {
+            foreach (var enemy in Enemies)
+            {
+                if (!enemy.IsDead)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }*/
 
         private bool IsHeroInside() => Hero.Location.X <= Size.Width && Hero.Location.Y <= Size.Height;
     }

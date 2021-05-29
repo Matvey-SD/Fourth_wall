@@ -11,7 +11,7 @@ using Fourth_wall.Properties;
 
 namespace Fourth_wall
 {
-    public partial class MainMenu : UserControl
+    public partial class MainMenu : Form
     {
         private Bitmap GetFormBackgroundImage()
         {
@@ -21,9 +21,12 @@ namespace Fourth_wall
                     new Rectangle(0, 0, bmp.Width, bmp.Height));
             return bmp;
         }
+        
         public MainMenu()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
             BackgroundImage = Resources.Background;
             Text = "4-th Wall";
 
@@ -36,8 +39,8 @@ namespace Fourth_wall
                 Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(exitButton);
-            exitButton.Click += (sender, args) =>
-                Application.Exit();
+            exitButton.Click += (sender, args) => Application.Exit();
+                
             
             var startButton = new Button()
             {

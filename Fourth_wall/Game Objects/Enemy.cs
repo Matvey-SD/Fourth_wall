@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Fourth_wall.Game_Objects
 {
     public class Enemy : GameObject
     {
         private int _hp;
-        private readonly int _fov = 1000;
+        private readonly int _fov = 100;
+        private readonly int _atcRange = 20;
         public readonly IEnumerable<Image> Texture;
         public bool IsTriggered { get; private set; } = false;
         public bool IsDead { get; private set; } = false;
+        private bool _isAttackCooldown = false;
 
         #region Constructor
         public Enemy(Point location, int hp, IEnumerable<Image> texture) : base(location)
@@ -26,7 +29,7 @@ namespace Fourth_wall.Game_Objects
         }
         #endregion
 
-        public bool IsHeroDetected(Hero hero)
+        public void HeroSearch(Hero hero)
         {
             if (!IsDead)
             {
@@ -35,7 +38,6 @@ namespace Fourth_wall.Game_Objects
                 if (Math.Sqrt(x * x + y * y) <= _fov) 
                     IsTriggered = true;
             }
-            return IsTriggered;
         }
         
         public void HpChange(int hp)
@@ -63,6 +65,28 @@ namespace Fourth_wall.Game_Objects
                 case Directions.Right:
                     ChangeLocation(1, 0);
                     break;
+            }
+        }
+
+        public void AttackHero(Hero hero)
+        {
+            if (_isAttackCooldown)
+                return;
+
+            if (!IsDead)
+            {
+                var x = hero.Location.X - Location.X;
+                var y = hero.Location.Y - Location.Y;
+                if (Math.Sqrt(x * x + y * y) <= _atcRange)
+                {
+                    hero.HpRemove();
+                    _isAttackCooldown = true;
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(3000);
+                        _isAttackCooldown = false;
+                    });
+                }
             }
         }
     }
