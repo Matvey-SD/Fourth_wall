@@ -5,6 +5,9 @@ namespace Fourth_wall.Game_Objects
 {
     public class Chest : GameObject
     {
+        public readonly Size Collider = new Size(30, 30);
+        public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+        
         #region Constructor
         public Chest(Point location) : base(location)
         {
@@ -22,8 +25,8 @@ namespace Fourth_wall.Game_Objects
 
         private bool IsHeroNear(Hero hero)
         {
-            var x = Location.X - hero.Location.X;
-            var y = Location.Y - hero.Location.Y;
+            var x = MiddlePoint.X - hero.MiddlePoint.X;
+            var y = MiddlePoint.Y - hero.MiddlePoint.Y;
             
             return Math.Sqrt(x * x + y * y) <= 50;
         }

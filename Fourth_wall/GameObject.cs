@@ -6,7 +6,7 @@ namespace Fourth_wall
     public class GameObject
     {
         private Point _location;
-        
+
         public Point Location => _location;
 
         #region Constructor

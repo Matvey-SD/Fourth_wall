@@ -2,7 +2,7 @@
 
 namespace Fourth_wall
 {
-    partial class GameStage
+    sealed partial class GameStage
     {
         /// <summary>
         /// Required designer variable.

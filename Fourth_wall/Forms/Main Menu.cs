@@ -11,7 +11,7 @@ using Fourth_wall.Properties;
 
 namespace Fourth_wall
 {
-    public partial class MainMenu : Form
+    public sealed partial class MainMenu : Form
     {
         private Bitmap GetFormBackgroundImage()
         {
@@ -28,7 +28,7 @@ namespace Fourth_wall
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
             BackgroundImage = Resources.Background;
-            Text = "4-th Wall";
+            Text = Resources.GameName;
 
             var userName = Environment.UserName;
 

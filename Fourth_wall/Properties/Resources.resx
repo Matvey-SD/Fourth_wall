@@ -136,4 +136,10 @@
   <data name="Error_Text_2" xml:space="preserve">
     <value>%)</value>
   </data>
+  <data name="GameName" xml:space="preserve">
+    <value>4-th Wall</value>
+  </data>
+  <data name="DeathMessage" xml:space="preserve">
+    <value>Со смертью этого персонажа нить вашей судьбы обрывается. Загрузите сохранённую игру дабы восстановить течение судьбы, или живите дальше в проклятом мире, который сами и создали</value>
+  </data>
 </root>

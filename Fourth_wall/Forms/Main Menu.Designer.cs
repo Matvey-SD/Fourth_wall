@@ -1,6 +1,6 @@
 ﻿namespace Fourth_wall
 {
-    partial class MainMenu
+    sealed partial class MainMenu
     {
         /// <summary>
         /// Обязательная переменная конструктора.

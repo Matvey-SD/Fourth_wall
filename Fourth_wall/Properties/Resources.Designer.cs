@@ -71,6 +71,15 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Со смертью этого персонажа нить вашей судьбы обрывается. Загрузите сохранённую игру дабы восстановить течение судьбы, или живите дальше в проклятом мире, который сами и создали.
+        /// </summary>
+        internal static string DeathMessage {
+            get {
+                return ResourceManager.GetString("DeathMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем некоторые сведения об ошибке, а затем будет автоматичесски выполнена перезашрузка. (выполнено: .
         /// </summary>
         internal static string Error_Text_1 {
@@ -85,6 +94,15 @@ namespace Fourth_wall.Properties {
         internal static string Error_Text_2 {
             get {
                 return ResourceManager.GetString("Error_Text_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4-th Wall.
+        /// </summary>
+        internal static string GameName {
+            get {
+                return ResourceManager.GetString("GameName", resourceCulture);
             }
         }
         
