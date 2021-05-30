@@ -52,7 +52,7 @@ namespace Fourth_wall
             startButton.Click += (sender, args) =>
             {
                 Hide();
-                new GameStage(Locations.CreateSecondLocation()).Show();
+                new GameStage(Locations.CreateFirstLocation()).Show();
             };
                 
             
