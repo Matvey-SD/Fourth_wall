@@ -7,28 +7,29 @@ namespace Fourth_wall.Game_Objects
 {
     public class Enemy : GameObject, ICreature
     {
+        public EnemyType Type { get; private set; }
         private int _hp;
         private readonly int _fov = 100;
         private readonly int _atcRange = 15;
-        public readonly IEnumerable<Image> Texture;
         public bool IsTriggered { get; private set; } = false;
         public bool IsDead { get; private set; } = false;
         private bool _isAttackCooldown = false;
         
         public readonly Size Collider = new Size(19, 19);
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+        public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
 
         #region Constructor
-        public Enemy(Point location, int hp, IEnumerable<Image> texture) : base(location)
+        public Enemy(Point location, int hp, EnemyType type) : base(location)
         {
             _hp = hp;
-            Texture = texture;
+            Type = type;
         }
 
-        public Enemy(int x, int y, int hp, IEnumerable<Image> texture) : base(x, y)
+        public Enemy(int x, int y, int hp, EnemyType type) : base(x, y)
         {
             _hp = hp;
-            Texture = texture;
+            Type = type;
         }
         #endregion
         
@@ -58,6 +59,12 @@ namespace Fourth_wall.Game_Objects
             var y = hero.MiddlePoint.Y - MiddlePoint.Y;
             return Math.Sqrt(x * x + y * y) <= 2 * _atcRange / 3 +
                 (hero.Collider.Width + hero.Collider.Height + Collider.Width + Collider.Height) / 4;
+        }
+
+        public bool IsPointInside(Point point)
+        {
+            return (point.X > Location.X && point.X < OppositeCorner.X
+                                         && point.Y > Location.Y && point.Y < OppositeCorner.Y);
         }
         
         public void HpChange(int hp)

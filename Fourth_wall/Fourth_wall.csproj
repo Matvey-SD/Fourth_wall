@@ -48,17 +48,12 @@
   <ItemGroup>
     <Compile Include="Directions.cs" />
     <Compile Include="Enemies.cs" />
+    <Compile Include="EnemyType.cs" />
     <Compile Include="Forms\Game Stage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Game Stage.Designer.cs">
       <DependentUpon>Game Stage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main Menu.cs">
       <SubType>Form</SubType>

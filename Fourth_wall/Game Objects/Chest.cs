@@ -5,8 +5,12 @@ namespace Fourth_wall.Game_Objects
 {
     public class Chest : GameObject
     {
-        public readonly Size Collider = new Size(30, 30);
+        public readonly Size Collider = new Size(15, 12);
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+
+        public bool IsOpened => _isOpened;
+
+        private bool _isOpened = false;
         
         #region Constructor
         public Chest(Point location) : base(location)
@@ -23,12 +27,13 @@ namespace Fourth_wall.Game_Objects
             return location.IsAllEnemiesDead && IsHeroNear(location.Hero);
         }
 
-        private bool IsHeroNear(Hero hero)
+        public bool IsHeroNear(Hero hero)
         {
             var x = MiddlePoint.X - hero.MiddlePoint.X;
             var y = MiddlePoint.Y - hero.MiddlePoint.Y;
-            
-            return Math.Sqrt(x * x + y * y) <= 50;
+
+            if (Math.Sqrt(x * x + y * y) <= 15) _isOpened = true;
+            return _isOpened;
         }
     }
 }

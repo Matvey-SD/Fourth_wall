@@ -6,12 +6,15 @@ namespace Fourth_wall
 {
     public class Location
     {
+        public readonly bool IsFirstLocation;
         public readonly IEnumerable<Enemy> Enemies;
         public readonly IEnumerable<Wall> Walls;
         public readonly IEnumerable<DestructibleObject> DestructibleObjects;
         public readonly Chest Chest;
         public readonly Hero Hero;
+        public readonly Exit Exit;
         private readonly Size _size = new Size(500, 300);
+        public bool IsChestOpened = false;
         public bool IsAllEnemiesDead
         {
             get
@@ -29,13 +32,21 @@ namespace Fourth_wall
         }
 
         public Location(IEnumerable<Enemy> enemies, IEnumerable<Wall> walls, 
-            IEnumerable<DestructibleObject> destructibleObjectses, Chest chest, Hero hero)
+            IEnumerable<DestructibleObject> destructibleObjectses, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
         {
             Enemies = enemies;
             Walls = walls;
             DestructibleObjects = destructibleObjectses;
             Hero = hero;
+            IsFirstLocation = isFirstLocation;
+            Exit = exit;
             Chest = chest;
+        }
+
+        public void SetHero(Hero hero)
+        {
+            Hero.SetHp(hero.Hp);
+            Hero.SetDamageBoost(hero.DamageBoost);
         }
 
         public void MoveEnemies()
@@ -136,6 +147,12 @@ namespace Fourth_wall
                 if (!destructibleObject.IsDestroyed && destructibleObject.IsPointInside(point))
                     return false;
             }
+            
+            foreach (var enemy in Enemies)
+            {
+                if (!enemy.IsDead && enemy.IsPointInside(point))
+                    return false;
+            }
 
             return true;
         }
@@ -154,6 +171,16 @@ namespace Fourth_wall
             {
                 enemy.AttackHero(Hero);
             }
+        }
+        
+        public bool CanOpenChest()
+        {
+            return IsAllEnemiesDead && Chest.IsHeroNear(Hero);
+        }
+
+        public bool LeavingMap()
+        {
+            return IsAllEnemiesDead && Exit.IsHeroNear(Hero);
         }
 
         private bool IsHeroInside() => Hero.MiddlePoint.X <= _size.Width && Hero.MiddlePoint.Y <= _size.Height;

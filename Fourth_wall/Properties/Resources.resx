@@ -121,8 +121,8 @@
   <data name="Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MainMenu_On_Exit" xml:space="preserve">
-    <value>Вы точно уверены?</value>
+  <data name="On_Exit" xml:space="preserve">
+    <value>Вы точно уверены, что хотите выйти?</value>
   </data>
   <data name="MainMenu_Exit" xml:space="preserve">
     <value>Выход</value>
@@ -130,16 +130,31 @@
   <data name="MainMenu_Start" xml:space="preserve">
     <value>Сыграем, </value>
   </data>
-  <data name="Error_Text_1" xml:space="preserve">
-    <value>На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем некоторые сведения об ошибке, а затем будет автоматичесски выполнена перезашрузка. (выполнено: </value>
-  </data>
-  <data name="Error_Text_2" xml:space="preserve">
-    <value>%)</value>
-  </data>
   <data name="GameName" xml:space="preserve">
     <value>4-th Wall</value>
   </data>
   <data name="DeathMessage" xml:space="preserve">
     <value>Со смертью этого персонажа нить вашей судьбы обрывается. Загрузите сохранённую игру дабы восстановить течение судьбы, или живите дальше в проклятом мире, который сами и создали</value>
+  </data>
+  <data name="ChestOpen_Message" xml:space="preserve">
+    <value>В сундуке лежат две таблетки, синяя и красная, а также записка: "Красная +2 дамага, синяя - хилл". Мда, с фантазией всё плохо. Вы хотите съесть красную? </value>
+  </data>
+  <data name="HPInfo" xml:space="preserve">
+    <value>Ваше здоровье: </value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Управление: WASD - движение, SPACE - удар. Всё просто!</value>
+  </data>
+  <data name="GameEndsText" xml:space="preserve">
+    <value>Поздравляю, вы прошли эту игру. Вау, да вы круты.</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="OpenChest" xml:space="preserve">
+    <value>Вы открываете сундук</value>
+  </data>
+  <data name="GameEnd" xml:space="preserve">
+    <value>Конец игры!</value>
   </data>
 </root>

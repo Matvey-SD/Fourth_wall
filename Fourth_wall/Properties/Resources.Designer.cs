@@ -71,6 +71,15 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to В сундуке лежат две таблетки, синяя и красная, а также записка: &quot;Красная +2 дамага, синяя - хилл&quot;. Мда, с фантазией всё плохо. Вы хотите съесть красную? .
+        /// </summary>
+        internal static string ChestOpen_Message {
+            get {
+                return ResourceManager.GetString("ChestOpen_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Со смертью этого персонажа нить вашей судьбы обрывается. Загрузите сохранённую игру дабы восстановить течение судьбы, или живите дальше в проклятом мире, который сами и создали.
         /// </summary>
         internal static string DeathMessage {
@@ -80,20 +89,29 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to На вашем ПК возникла проблема, и его необходимо перезагрузить. Мы лишь собираем некоторые сведения об ошибке, а затем будет автоматичесски выполнена перезашрузка. (выполнено: .
+        ///   Looks up a localized string similar to Выход.
         /// </summary>
-        internal static string Error_Text_1 {
+        internal static string Exit {
             get {
-                return ResourceManager.GetString("Error_Text_1", resourceCulture);
+                return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to %).
+        ///   Looks up a localized string similar to Конец игры!.
         /// </summary>
-        internal static string Error_Text_2 {
+        internal static string GameEnd {
             get {
-                return ResourceManager.GetString("Error_Text_2", resourceCulture);
+                return ResourceManager.GetString("GameEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравляю, вы прошли эту игру. Вау, да вы круты..
+        /// </summary>
+        internal static string GameEndsText {
+            get {
+                return ResourceManager.GetString("GameEndsText", resourceCulture);
             }
         }
         
@@ -107,6 +125,24 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ваше здоровье: .
+        /// </summary>
+        internal static string HPInfo {
+            get {
+                return ResourceManager.GetString("HPInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Управление: WASD - движение, SPACE - удар. Всё просто!.
+        /// </summary>
+        internal static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Выход.
         /// </summary>
         internal static string MainMenu_Exit {
@@ -116,20 +152,29 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы точно уверены?.
-        /// </summary>
-        internal static string MainMenu_On_Exit {
-            get {
-                return ResourceManager.GetString("MainMenu_On_Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Сыграем, .
         /// </summary>
         internal static string MainMenu_Start {
             get {
                 return ResourceManager.GetString("MainMenu_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы точно уверены, что хотите выйти?.
+        /// </summary>
+        internal static string On_Exit {
+            get {
+                return ResourceManager.GetString("On_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы открываете сундук.
+        /// </summary>
+        internal static string OpenChest {
+            get {
+                return ResourceManager.GetString("OpenChest", resourceCulture);
             }
         }
     }

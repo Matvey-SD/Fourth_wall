@@ -9,36 +9,34 @@ namespace Fourth_wall.Game_Objects
 {
     public class Hero : GameObject, ICreature
     {
-        private int _maxHp;
+        public int MaxHp => 15;
         public int Hp { get; private set; }
         private int _damage;
-        private int _damageBoost;
+        public int DamageBoost { get; private set; }
         private int _range;
         public bool IsDead = false;
-        public readonly IEnumerable<Image> Texture;
         public readonly Size Collider = new Size(19, 19);
         private bool _isAttackCooldown = false;
+        
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+        public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
+        private int FullDamage => _damage + DamageBoost;
         
         #region Constructor
-        public Hero(Point location, int hp, IEnumerable<Image> texture, int damage, int range) : base(location)
+        public Hero(Point location, int hp, int damage, int range) : base(location)
         {
             Hp = hp;
-            Texture = texture;
             _damage = damage;
             _range = range;
-            _damageBoost = 0;
-            _maxHp = 6;
+            DamageBoost = 0;
         }
 
-        public Hero(int x, int y, int hp, IEnumerable<Image> texture, int damage, int range) : base(x, y)
+        public Hero(int x, int y, int hp, int damage, int range) : base(x, y)
         {
             Hp = hp;
-            Texture = texture;
             _damage = damage;
             _range = range;
-            _damageBoost = 0;
-            _maxHp = 6;
+            DamageBoost = 0;
         }
         #endregion
 
@@ -61,7 +59,7 @@ namespace Fourth_wall.Game_Objects
                 var y = MiddlePoint.Y - destructObj.MiddlePoint.Y;
                 if (Math.Sqrt(x * x + y * y) <= _range + 
                     (destructObj.Collider.Height + destructObj.Collider.Width + Collider.Height + Collider.Width)/4) 
-                    destructObj.HpChange(FullDamage());
+                    destructObj.HpChange(FullDamage);
             }
 
             foreach (var enemy in level.Enemies)
@@ -70,7 +68,7 @@ namespace Fourth_wall.Game_Objects
                 var y = MiddlePoint.Y - enemy.MiddlePoint.Y;
                 if (Math.Sqrt(x * x + y * y) <= _range + 
                     (enemy.Collider.Height + enemy.Collider.Width + Collider.Height + Collider.Width)/4)
-                    enemy.HpChange(FullDamage());
+                    enemy.HpChange(FullDamage);
             }
             
             _isAttackCooldown = true;
@@ -105,23 +103,15 @@ namespace Fourth_wall.Game_Objects
             if (--Hp <= 0 && !IsDead)
             {
                 IsDead = true;
-                Die();
             }
         }
 
-        public void BoostDamage() => _damageBoost += 2;
+        public void SetHp(int value) => Hp = value;
 
-        public void Heal() => Hp = _maxHp;
+        public void SetDamageBoost(int value) => DamageBoost = value;
 
-        private int FullDamage() => _damage + _damageBoost;
+        public void BoostDamage() => DamageBoost += 2;
 
-        private void Die()
-        {
-            var result = MessageBox.Show(Resources.DeathMessage, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            if (result == DialogResult.OK)
-            {
-                Application.Exit();
-            }
-        }
+        public void Heal() => Hp = MaxHp;
     }
 }
