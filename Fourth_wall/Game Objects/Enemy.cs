@@ -7,7 +7,7 @@ namespace Fourth_wall.Game_Objects
 {
     public class Enemy : GameObject, ICreature
     {
-        public EnemyType Type { get; private set; }
+        public EnemyType Type { get; }
         private int _hp;
         private readonly int _fov = 100;
         private readonly int _atcRange = 15;
@@ -76,6 +76,8 @@ namespace Fourth_wall.Game_Objects
 
         private void Die() => IsDead = true;
 
+        
+        // TODO Movement speed
         public void Move(Directions direction)
         {
             switch (direction)

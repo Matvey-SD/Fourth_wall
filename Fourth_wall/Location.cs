@@ -81,6 +81,8 @@ namespace Fourth_wall
             if (IsThereSpaceToMove(direction, Hero)) Hero.Move(direction);
         }
 
+        
+        // TODO different path length
         private bool IsThereSpaceToMove(Directions direction, ICreature target)
         {
             switch (direction)

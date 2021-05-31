@@ -48,8 +48,6 @@ namespace Fourth_wall
             _chestClosedImage = Image.FromFile(@"..\..\Resources\ChestClosed.png");
             _chestOpenedImage = Image.FromFile(@"..\..\Resources\ChestOpened.png");
             _holeImage = Image.FromFile(@"..\..\Resources\Hole.png");
-            
-            
         }
 
         #endregion

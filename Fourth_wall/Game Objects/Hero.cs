@@ -14,6 +14,7 @@ namespace Fourth_wall.Game_Objects
         private readonly int _damage;
         public int DamageBoost { get; private set; }
         private readonly int _range;
+        public int Stamina { get; private set; }
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
