@@ -35,19 +35,21 @@ namespace Fourth_wall
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            BackgroundImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Floor.png");
-            _heroImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Hero.png");
-            _heroAttackImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\HeroAttack.png");
-            _heroLeftImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\HeroLeft.png");
-            _heroAttackLeftImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\HeroAttackLeft.png");
-            _enemyImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Enemy.png");
-            _deadEnemy = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\DeadEnemy.png");
-            _wallImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Wall.png");
-            _boxImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Box.png");
-            _brokenBoxImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\BoxBroken.png");
-            _chestClosedImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\ChestClosed.png");
-            _chestOpenedImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\ChestOpened.png");
-            _holeImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Hole.png");
+            BackgroundImage = Image.FromFile(@"..\..\Resources\Floor.png");
+            _heroImage = Image.FromFile(@"..\..\Resources\Hero.png");
+            _heroAttackImage = Image.FromFile(@"..\..\Resources\HeroAttack.png");
+            _heroLeftImage = Image.FromFile(@"..\..\Resources\HeroLeft.png");
+            _heroAttackLeftImage = Image.FromFile(@"..\..\Resources\HeroAttackLeft.png");
+            _enemyImage = Image.FromFile(@"..\..\Resources\Enemy.png");
+            _deadEnemy = Image.FromFile(@"..\..\Resources\DeadEnemy.png");
+            _wallImage = Image.FromFile(@"..\..\Resources\Wall.png");
+            _boxImage = Image.FromFile(@"..\..\Resources\Box.png");
+            _brokenBoxImage = Image.FromFile(@"..\..\Resources\BoxBroken.png");
+            _chestClosedImage = Image.FromFile(@"..\..\Resources\ChestClosed.png");
+            _chestOpenedImage = Image.FromFile(@"..\..\Resources\ChestOpened.png");
+            _holeImage = Image.FromFile(@"..\..\Resources\Hole.png");
+            
+            
         }
 
         #endregion

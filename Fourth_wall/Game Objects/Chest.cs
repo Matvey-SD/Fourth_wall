@@ -6,11 +6,11 @@ namespace Fourth_wall.Game_Objects
     public class Chest : GameObject
     {
         public readonly Size Collider = new Size(15, 12);
-        public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+        private Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
 
         public bool IsOpened => _isOpened;
 
-        private bool _isOpened = false;
+        private bool _isOpened;
         
         #region Constructor
         public Chest(Point location) : base(location)
@@ -21,11 +21,6 @@ namespace Fourth_wall.Game_Objects
         {
         }
         #endregion
-
-        public bool CanOpenChest(Location location)
-        {
-            return location.IsAllEnemiesDead && IsHeroNear(location.Hero);
-        }
 
         public bool IsHeroNear(Hero hero)
         {

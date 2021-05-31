@@ -146,7 +146,7 @@
     <value>Управление: WASD - движение, SPACE - удар. Всё просто!</value>
   </data>
   <data name="GameEndsText" xml:space="preserve">
-    <value>Поздравляю, вы прошли эту игру. Вау, да вы круты.</value>
+    <value>Поздравляю, вы прошли игру. Вау, да вы круты.</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>

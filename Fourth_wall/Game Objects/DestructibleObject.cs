@@ -9,7 +9,7 @@ namespace Fourth_wall.Game_Objects
         public readonly Size Collider;
         private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
         public Point MiddlePoint => new Point(Location.X + Collider.Width / 2, Location.Y + Collider.Height / 2);
-        public bool IsDestroyed { get; private set; } = false;
+        public bool IsDestroyed { get; private set; }
 
         #region Constructor
         public DestructibleObject(Point location, Size collider, int hp ) : base(location)

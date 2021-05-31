@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Fourth_wall.Game_Objects;
 using Fourth_wall.Properties;
 
 namespace Fourth_wall
 {
     public sealed partial class GameStage : Form
     {
-        public Location _location;
+        private Location _location;
 
-        private Label _hp;
-        private Label _info;
+        private readonly Label _hp;
+        private readonly Label _info;
 
-        private bool _isExitByEsc = false;
-        private bool _isGamesEndsMessage = false;
-        private bool _isHidden = false;
+        private bool _isExitByEsc;
+        private bool _isGamesEndsMessage;
+        private bool _isHidden;
 
         public GameStage(Location location)
         {
@@ -30,7 +31,12 @@ namespace Fourth_wall
             tickCounter.Tick += Tick;
             tickCounter.Start();
             
-            _hp = new Label {Location = new Point(0, 0), BackColor = Color.Transparent};
+            _hp = new Label
+            {
+                Location = new Point(0, 0), 
+                BackColor = Color.Transparent,
+                ForeColor = Color.DarkRed
+            };
             Controls.Add(_hp);
 
             _info = new Label()
@@ -84,7 +90,6 @@ namespace Fourth_wall
                     _location.MoveEnemies();
                     _hp.Text = _location.Hero.Hp.ToString();
                     _info.Text = PrintInfo();
-                    _location.Chest.CanOpenChest(_location);
                     OpenChest();
                     Invalidate(); 
                 }
@@ -96,50 +101,77 @@ namespace Fourth_wall
         protected override void OnPaint(PaintEventArgs e)
         {
             foreach (var wall in _location.Walls)
-                e.Graphics.DrawImage(_wallImage, 
-                    new Rectangle(ScreenCoordinates(wall), ScreenSize(wall.Collider)));
+                PrintWall(e, wall);
             
+            PrintExit(e);
+            
+            foreach (var destructibleObject in _location.DestructibleObjects)
+                PrintBox(e, destructibleObject);
+            
+            PrintChest(e);
+            
+            foreach (var enemy in _location.Enemies) PrintEnemy(e, enemy);
+
+            PrintHero(e);
+        }
+
+        private void PrintWall(PaintEventArgs e, Wall wall)
+        {
+            e.Graphics.DrawImage(_wallImage, 
+                new Rectangle(ScreenCoordinates(wall), ScreenSize(wall.Collider)));
+        }
+
+        private void PrintExit(PaintEventArgs e)
+        {
             if (_location.IsAllEnemiesDead)
                 e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Exit.Collider), _holeImage),
                     ScreenCoordinates(_location.Exit));
-            
-            foreach (var destructibleObject in _location.DestructibleObjects)
-                e.Graphics.DrawImage(
-                    destructibleObject.IsDestroyed
-                        ? GetScaledImage(ScreenSize(destructibleObject.Collider), _brokenBoxImage)
-                        : GetScaledImage(ScreenSize(destructibleObject.Collider), _boxImage),
-                    new Rectangle(ScreenCoordinates(destructibleObject), ScreenSize(destructibleObject.Collider)));
-            
+        }
+        
+        private void PrintBox(PaintEventArgs e, DestructibleObject destructibleObject)
+        {
+            e.Graphics.DrawImage(
+                destructibleObject.IsDestroyed
+                    ? GetScaledImage(ScreenSize(destructibleObject.Collider), _brokenBoxImage)
+                    : GetScaledImage(ScreenSize(destructibleObject.Collider), _boxImage),
+                new Rectangle(ScreenCoordinates(destructibleObject), ScreenSize(destructibleObject.Collider)));
+        }
+
+        private void PrintChest(PaintEventArgs e)
+        {
             e.Graphics.DrawImage(
                 _location.Chest.IsOpened
                     ? GetScaledImage(ScreenSize(_location.Chest.Collider), _chestOpenedImage)
                     : GetScaledImage(ScreenSize(_location.Chest.Collider), _chestClosedImage), 
                 ScreenCoordinates(_location.Chest));
-            
-            foreach (var enemy in _location.Enemies)
-            {
-                e.Graphics.DrawImage(
-                    enemy.IsDead
-                        ? GetScaledImage(ScreenSize(enemy.Collider), _deadEnemy)
-                        : GetScaledImage(ScreenSize(enemy.Collider), _enemyImage),
-                    ScreenCoordinates(enemy));
-                if (enemy.Type == EnemyType.Heavy && !enemy.IsDead)
-                {
-                    e.Graphics.DrawRectangle(new Pen(Color.Gold), 
-                        new Rectangle(ScreenCoordinates(enemy.Location), new Size(ScreenSize(enemy.Collider).Width, 1)));
-                }
-            }
+        }
 
-            if (_location.Hero.lastDirection == Directions.Right)
+        private void PrintEnemy(PaintEventArgs e, Enemy enemy)
+        {
+            e.Graphics.DrawImage(
+                enemy.IsDead
+                    ? GetScaledImage(ScreenSize(enemy.Collider), _deadEnemy)
+                    : GetScaledImage(ScreenSize(enemy.Collider), _enemyImage),
+                ScreenCoordinates(enemy));
+            if (enemy.Type == EnemyType.Heavy && !enemy.IsDead)
+            {
+                e.Graphics.DrawRectangle(new Pen(Color.Gold), 
+                    new Rectangle(ScreenCoordinates(enemy.Location), new Size(ScreenSize(enemy.Collider).Width, 1)));
+            }
+        }
+
+        private void PrintHero(PaintEventArgs e)
+        {
+            if (_location.Hero.LastDirection == Directions.Right)
             {
                 e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
-                        _location.Hero._isAttackAnimation
+                        _location.Hero.IsAttackAnimation
                             ?_heroAttackImage
                             : _heroImage), 
                     ScreenCoordinates(_location.Hero));
             }
             else e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
-                    _location.Hero._isAttackAnimation
+                    _location.Hero.IsAttackAnimation
                         ?_heroAttackLeftImage
                         : _heroLeftImage), 
                 ScreenCoordinates(_location.Hero));

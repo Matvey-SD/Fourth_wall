@@ -11,13 +11,13 @@ namespace Fourth_wall.Game_Objects
         private int _hp;
         private readonly int _fov = 100;
         private readonly int _atcRange = 15;
-        public bool IsTriggered { get; private set; } = false;
-        public bool IsDead { get; private set; } = false;
-        private bool _isAttackCooldown = false;
+        public bool IsTriggered { get; private set; }
+        public bool IsDead { get; private set; }
+        private bool _isAttackCooldown;
         
         public readonly Size Collider = new Size(19, 19);
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
-        public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
+        private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
 
         #region Constructor
         public Enemy(Point location, int hp, EnemyType type) : base(location)

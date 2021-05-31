@@ -6,7 +6,7 @@ namespace Fourth_wall.Game_Objects
     {
         public readonly Size Collider;
 
-        public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
+        private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
 
         #region Constructor
         public Wall(Point location, Size collider) : base(location)

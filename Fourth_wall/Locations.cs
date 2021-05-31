@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using Fourth_wall.Game_Objects;
 
 namespace Fourth_wall
@@ -89,7 +88,7 @@ namespace Fourth_wall
 
             var hero = new Hero(30, 150, 15, 6, 20);
 
-            var exit = new Exit(450, 0);
+            var exit = new Exit(450, 0, CreateThirdLocation());
             
             return new Location(enemies, walls, 
                 destructibleObjects, chest,
@@ -100,9 +99,10 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                Enemies.CreateLightEnemy(450, 75), 
-                Enemies.CreateLightEnemy(450, 150), 
-                Enemies.CreateLightEnemy(450, 220)
+                Enemies.CreateLightEnemy(60, 150), 
+                Enemies.CreateLightEnemy(100, 149), 
+                Enemies.CreateHeavyEnemy(349, 130),
+                Enemies.CreateHeavyEnemy(350, 170)
             };
             
             var walls = new List<Wall>()
@@ -111,26 +111,20 @@ namespace Fourth_wall
                 new Wall(0, 0, 500, 20), 
                 new Wall(490, 0, 10, 300), 
                 new Wall(0, 280, 500, 20),
-                new Wall(190, 170, 150, 130),
-                new Wall(190, 10, 20, 90)
+                new Wall(160, 100, 20, 200),
             };
 
             var destructibleObjects = new List<DestructibleObject>()
             {
-                new DestructibleObject(170, 170, 20, 20, 8),
-                new DestructibleObject(150, 170, 20, 20, 8),
-                new DestructibleObject(130, 170, 20, 20, 8),
-                new DestructibleObject(110, 170, 20, 20, 8),
-                new DestructibleObject(90, 170, 20, 20, 8),
-                new DestructibleObject(70, 170, 20, 20, 8),
-                new DestructibleObject(50, 170, 20, 20, 8),
-                new DestructibleObject(30, 170, 20, 20, 8),
-                new DestructibleObject(10, 170, 20, 20, 8)
+                new DestructibleObject(160, 20, 20, 20, 8),
+                new DestructibleObject(160, 40, 20, 20, 8),
+                new DestructibleObject(160, 60, 20, 20, 8),
+                new DestructibleObject(160, 80, 20, 20, 8)
             };
 
-            var chest = new Chest(75, 30);
+            var chest = new Chest(450, 150);
 
-            var hero = new Hero(450, 250, 15, 6, 20);
+            var hero = new Hero(80, 250, 15, 6, 20);
 
             var exit = new Exit(450, 0);
             

@@ -5,9 +5,9 @@ namespace Fourth_wall.Game_Objects
 {
     public class Exit : GameObject
     {
-        public Location NextMap;
+        public readonly Location NextMap;
         public readonly Size Collider = new Size(20, 20);
-        public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
+        private Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
 
         #region Constructor
         

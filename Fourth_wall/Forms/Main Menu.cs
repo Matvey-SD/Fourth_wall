@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fourth_wall.Properties;
 
@@ -15,8 +9,8 @@ namespace Fourth_wall
     {
         private Bitmap GetFormBackgroundImage()
         {
-            Bitmap bmp = new Bitmap(ClientSize.Width, ClientSize.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
+            var bmp = new Bitmap(ClientSize.Width, ClientSize.Height);
+            using (var g = Graphics.FromImage(bmp))
                 g.DrawImage(BackgroundImage,
                     new Rectangle(0, 0, bmp.Width, bmp.Height));
             return bmp;
@@ -45,7 +39,7 @@ namespace Fourth_wall
             var startButton = new Button()
             {
                 Size = new Size(300, 60),
-                Text = Resources.MainMenu_Start + userName + "?",
+                Text = Resources.MainMenu_Start + userName + @"?",
                 Font = new Font(Font.FontFamily, 20)
             };
             Controls.Add(startButton);

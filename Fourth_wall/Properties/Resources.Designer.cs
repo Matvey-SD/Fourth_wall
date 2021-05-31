@@ -107,7 +107,7 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Поздравляю, вы прошли эту игру. Вау, да вы круты..
+        ///   Looks up a localized string similar to Поздравляю, вы прошли игру. Вау, да вы круты..
         /// </summary>
         internal static string GameEndsText {
             get {
