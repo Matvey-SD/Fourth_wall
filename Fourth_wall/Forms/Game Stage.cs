@@ -100,6 +100,7 @@ namespace Fourth_wall
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            // TODO More animations
             foreach (var wall in _location.Walls)
                 PrintWall(e, wall);
             
@@ -214,6 +215,7 @@ namespace Fourth_wall
 
         private void GameStage_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // TODO More Inputs (Diagonal movement, block, sprint)
             switch (e.KeyChar)
             {
                 case 'w' :

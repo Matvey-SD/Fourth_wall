@@ -5,6 +5,7 @@ namespace Fourth_wall
 {
     public static class Locations
     {
+        // TODO New locations and restruct current
         public static Location CreateFirstLocation()
         {
             var enemies = new List<Enemy>()

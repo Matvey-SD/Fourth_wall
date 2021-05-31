@@ -40,10 +40,5 @@ namespace Fourth_wall
         {
             _location = new Point(x, y);
         }
-
-        public void Remove()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

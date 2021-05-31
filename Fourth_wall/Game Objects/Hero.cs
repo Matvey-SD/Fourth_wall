@@ -7,6 +7,8 @@ namespace Fourth_wall.Game_Objects
 {
     public class Hero : GameObject, ICreature
     {
+        //TODO Stamina, stamina change, stamina regen, block, diagonal moves
+        
         private int MaxHp => 15;
         public int Hp { get; private set; }
         private readonly int _damage;

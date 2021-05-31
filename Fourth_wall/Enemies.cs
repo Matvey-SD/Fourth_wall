@@ -5,6 +5,8 @@ namespace Fourth_wall
 {
     public static class Enemies
     {
+        // TODO More Classes
+        
         public static Enemy CreateLightEnemy(int x, int y) => new Enemy(x, y, 14, EnemyType.Light);
 
         public static Enemy CreateLightEnemy(Point location) => new Enemy(location, 14, EnemyType.Light);

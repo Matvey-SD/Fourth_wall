@@ -7,3 +7,7 @@ C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_
 C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.csproj.CoreCompileInputs.cache
 C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.exe
 C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.pdb
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\bin\Debug\Fourth_wall.exe.manifest
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\bin\Debug\Fourth_wall.application
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.exe.manifest
+C:\Users\Матвей\Desktop\Projects\Fourth_wall\Fourth_wall\obj\Debug\Fourth_wall.application
