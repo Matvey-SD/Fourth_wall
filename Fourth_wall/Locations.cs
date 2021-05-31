@@ -11,7 +11,7 @@ namespace Fourth_wall
             var enemies = new List<Enemy>()
             {
                 Enemies.CreateLightEnemy(450, 75), 
-                Enemies.CreateHeavyEnemy(450, 150), 
+                Enemies.CreateLightEnemy(450, 150), 
                 Enemies.CreateLightEnemy(450, 220)
             };
             
@@ -38,7 +38,7 @@ namespace Fourth_wall
                 new DestructibleObject(10, 170, 20, 20, 8)
             };
 
-            var chest = new Chest(75, 30);
+            var chest = new Chest(450, 260);
 
             var hero = new Hero(75, 250, 15, 6, 20);
 
@@ -85,7 +85,7 @@ namespace Fourth_wall
                 new DestructibleObject(160, 260, 20, 20, 8)
             };
 
-            var chest = new Chest(75, 30);
+            var chest = new Chest(450, 260);
 
             var hero = new Hero(30, 150, 15, 6, 20);
 

@@ -35,7 +35,7 @@ namespace Fourth_wall.Game_Objects
             var x = MiddlePoint.X - hero.MiddlePoint.X;
             var y = MiddlePoint.Y - hero.MiddlePoint.Y;
 
-            return Math.Sqrt(x * x + y * y) <= 45;
+            return Math.Sqrt(x * x + y * y) <= 30;
         }
         
     }

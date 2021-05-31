@@ -8,17 +8,7 @@ namespace Fourth_wall
     public sealed partial class GameStage : Form
     {
         public Location _location;
-        
-        private Image _heroImage;
-        private Image _enemyImage;
-        private Image _deadEnemy;
-        private Image _wallImage;
-        private Image _boxImage;
-        private Image _brokenBoxImage;
-        private Image _chestClosedImage;
-        private Image _chestOpenedImage;
-        private Image _holeImage;
-        
+
         private Label _hp;
         private Label _info;
 
@@ -31,18 +21,7 @@ namespace Fourth_wall
             DoubleBuffered = true;
             _location = location;
             WindowState = FormWindowState.Maximized;
-            
-            BackgroundImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Floor.png");
-            _heroImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Hero.png");
-            _enemyImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Enemy.png");
-            _deadEnemy = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\DeadEnemy.png");
-            _wallImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Wall.png");
-            _boxImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Box.png");
-            _brokenBoxImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\BoxBroken.png");
-            _chestClosedImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\ChestClosed.png");
-            _chestOpenedImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\ChestOpened.png");
-            _holeImage = Image.FromFile("C:\\Users\\Матвей\\Desktop\\Projects\\Fourth_wall\\Fourth_wall\\Resources\\Hole.png");
-            
+
             FormBorderStyle = FormBorderStyle.None;
             Text = Resources.GameName;
             
@@ -62,7 +41,6 @@ namespace Fourth_wall
                 TextAlign = ContentAlignment.MiddleCenter
             };
             Controls.Add(_info);
-            
             
 
             KeyPress += GameStage_KeyPress;
@@ -151,8 +129,20 @@ namespace Fourth_wall
                         new Rectangle(ScreenCoordinates(enemy.Location), new Size(ScreenSize(enemy.Collider).Width, 1)));
                 }
             }
-            
-            e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), _heroImage), ScreenCoordinates(_location.Hero));
+
+            if (_location.Hero.lastDirection == Directions.Right)
+            {
+                e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
+                        _location.Hero._isAttackAnimation
+                            ?_heroAttackImage
+                            : _heroImage), 
+                    ScreenCoordinates(_location.Hero));
+            }
+            else e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
+                    _location.Hero._isAttackAnimation
+                        ?_heroAttackLeftImage
+                        : _heroLeftImage), 
+                ScreenCoordinates(_location.Hero));
         }
         
         private Bitmap GetScaledImage(int width, int height, Image image)

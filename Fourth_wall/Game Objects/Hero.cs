@@ -15,9 +15,11 @@ namespace Fourth_wall.Game_Objects
         public int DamageBoost { get; private set; }
         private int _range;
         public bool IsDead = false;
+        public Directions lastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
         private bool _isAttackCooldown = false;
-        
+        public bool _isAttackAnimation { get; private set; } = false;
+
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
         public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
         private int FullDamage => _damage + DamageBoost;
@@ -72,9 +74,13 @@ namespace Fourth_wall.Game_Objects
             }
             
             _isAttackCooldown = true;
+            _isAttackAnimation = true;
+            
             Task.Run(async () =>
             {
-                await Task.Delay(1000);
+                await Task.Delay(500);
+                _isAttackAnimation = false;
+                await Task.Delay(500);
                 _isAttackCooldown = false;
             });
         }
@@ -90,9 +96,11 @@ namespace Fourth_wall.Game_Objects
                     ChangeLocation(0, -1);
                     break;
                 case Directions.Left:
+                    lastDirection = Directions.Left;
                     ChangeLocation(-1, 0);
                     break;
                 case Directions.Right:
+                    lastDirection = Directions.Right;
                     ChangeLocation(1, 0);
                     break;
             }
