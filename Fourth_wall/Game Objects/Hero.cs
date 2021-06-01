@@ -22,7 +22,6 @@ namespace Fourth_wall.Game_Objects
         public bool IsAttackAnimation { get; private set; }
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
-        public Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
         private int FullDamage => _damage + DamageBoost;
         
         #region Constructor
