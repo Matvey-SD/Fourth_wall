@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
 using Fourth_wall.Game_Objects;
 
 namespace Fourth_wall
@@ -7,9 +9,9 @@ namespace Fourth_wall
     public class Location
     {
         public readonly bool IsFirstLocation;
-        public readonly IEnumerable<Enemy> Enemies;
+        public readonly List<Enemy> Enemies;
         public readonly IEnumerable<Wall> Walls;
-        public readonly IEnumerable<DestructibleObject> DestructibleObjects;
+        public readonly List<DestructibleObject> DestructibleObjects;
         public readonly Chest Chest;
         public readonly Hero Hero;
         public readonly Exit Exit;
@@ -31,8 +33,8 @@ namespace Fourth_wall
             }
         }
 
-        public Location(IEnumerable<Enemy> enemies, IEnumerable<Wall> walls, 
-            IEnumerable<DestructibleObject> destructibleObjectses, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
+        public Location(List<Enemy> enemies, IEnumerable<Wall> walls, 
+            List<DestructibleObject> destructibleObjectses, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
         {
             Enemies = enemies;
             Walls = walls;
@@ -52,8 +54,7 @@ namespace Fourth_wall
         public void MoveEnemies()
         {
             if (IsHeroInside())
-                foreach (var enemy in Enemies)
-                    TryMoveEnemy(enemy);
+                Parallel.For(0, Enemies.Count(), i => { TryMoveEnemy(Enemies[i]); });
         }
 
         private void TryMoveEnemy(Enemy enemy)
@@ -82,7 +83,6 @@ namespace Fourth_wall
         }
 
         
-        // TODO different path length
         private bool IsThereSpaceToMove(Directions direction, ICreature target)
         {
             switch (direction)
@@ -161,18 +161,12 @@ namespace Fourth_wall
 
         public void EnemiesSearchForHero()
         {
-            foreach (var enemy in Enemies)
-            {
-                enemy.HeroSearch(Hero);
-            }
+            Parallel.For(0, Enemies.Count(), i => { Enemies[i].HeroSearch(Hero); });
         }
 
         public void EnemiesAttackHero()
         {
-            foreach (var enemy in Enemies)
-            {
-                enemy.AttackHero(Hero);
-            }
+            Parallel.For(0, Enemies.Count(), i => { Enemies[i].AttackHero(Hero); });
         }
         
         public bool CanOpenChest()
