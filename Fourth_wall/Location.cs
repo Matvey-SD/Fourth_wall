@@ -91,7 +91,7 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y + 1)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y + target.Speed)))
                         {
                             return false;
                         }
@@ -102,7 +102,7 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y - 1)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y - target.Speed)))
                         {
                             return false;
                         }
@@ -113,7 +113,7 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X - 1, colliderPoint.Y)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X - target.Speed, colliderPoint.Y)))
                         {
                             return false;
                         }
@@ -124,7 +124,7 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X + 1, colliderPoint.Y)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X + target.Speed, colliderPoint.Y)))
                         {
                             return false;
                         }

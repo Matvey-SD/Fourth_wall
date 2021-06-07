@@ -21,7 +21,6 @@ namespace Fourth_wall
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
             FormBorderStyle = FormBorderStyle.None;
-            BackgroundImage = Resources.Background;
             Text = Resources.GameName;
 
             var userName = Environment.UserName;

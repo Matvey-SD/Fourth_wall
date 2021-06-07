@@ -3,14 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using Fourth_wall.Game_Objects;
 using Fourth_wall.Properties;
+using System.Windows.Input;
 
 namespace Fourth_wall
 {
     public sealed partial class GameStage : Form
     {
         private Location _location;
-
-        private readonly Label _hp;
         private readonly Label _info;
 
         private bool _isExitByEsc;
@@ -30,14 +29,6 @@ namespace Fourth_wall
             var tickCounter = new Timer {Interval = 10};
             tickCounter.Tick += Tick;
             tickCounter.Start();
-            
-            _hp = new Label
-            {
-                Location = new Point(0, 0), 
-                BackColor = Color.Transparent,
-                ForeColor = Color.DarkRed
-            };
-            Controls.Add(_hp);
 
             _info = new Label()
             {
@@ -47,10 +38,7 @@ namespace Fourth_wall
                 TextAlign = ContentAlignment.MiddleCenter
             };
             Controls.Add(_info);
-            
 
-            KeyPress += GameStage_KeyPress;
-            
             SizeChanged += (sender, args) => BackgroundImage = GetScaledImage(ClientSize.Width, ClientSize.Height, BackgroundImage);
 
             Load += (sender, args) => OnSizeChanged(EventArgs.Empty);
@@ -84,14 +72,14 @@ namespace Fourth_wall
             {
                 if (!_location.Hero.IsDead)
                 {
+                    ReadInput();
                     ChangeLocation();
                     _location.EnemiesSearchForHero();
                     _location.EnemiesAttackHero();
                     _location.MoveEnemies();
-                    _hp.Text = _location.Hero.Hp.ToString();
                     _info.Text = PrintInfo();
                     OpenChest();
-                    Invalidate(); 
+                    Invalidate();
                 }
                 else
                     GameRestart();
@@ -114,6 +102,8 @@ namespace Fourth_wall
             foreach (var enemy in _location.Enemies) PrintEnemy(e, enemy);
 
             PrintHero(e);
+
+            PrintHp(e);
         }
 
         private void PrintWall(PaintEventArgs e, Wall wall)
@@ -177,6 +167,13 @@ namespace Fourth_wall
                         : _heroLeftImage), 
                 ScreenCoordinates(_location.Hero));
         }
+
+        private void PrintHp(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(5, 5, 200, 20));
+            e.Graphics.FillRectangle(new SolidBrush(Color.DarkRed),
+                new Rectangle(5, 5, (200*_location.Hero.Hp)/15, 20));
+        }
         
         private Bitmap GetScaledImage(int width, int height, Image image)
         {
@@ -213,7 +210,7 @@ namespace Fourth_wall
         private Size ScreenSize(Size gameObjectSize) => 
             new Size(ClientSize.Width * gameObjectSize.Width / 500, ClientSize.Height * gameObjectSize.Height / 300);
 
-        private void GameStage_KeyPress(object sender, KeyPressEventArgs e)
+        /*private void GameStage_KeyPress(object sender, KeyPressEventArgs e)
         {
             // TODO More Inputs (Diagonal movement, block, sprint)
             switch (e.KeyChar)
@@ -238,6 +235,26 @@ namespace Fourth_wall
                     _location.Hero.Hit(_location);
                     break;
             }
+        }*/
+        
+        private void ReadInput()
+        {
+            // TODO More Inputs (Block, sprint)
+            if (Keyboard.IsKeyDown(Key.W))
+                _location.TryMoveHero(Directions.Up);
+            if (Keyboard.IsKeyDown(Key.S))
+                _location.TryMoveHero(Directions.Down);
+            if (Keyboard.IsKeyDown(Key.D))
+                _location.TryMoveHero(Directions.Right);
+            if (Keyboard.IsKeyDown(Key.A))
+                _location.TryMoveHero(Directions.Left);
+            if (Keyboard.IsKeyDown(Key.Escape))
+            {
+                _isExitByEsc = true; 
+                Application.Exit();
+            }
+            if (Keyboard.IsKeyDown(Key.Space))
+                _location.Hero.Hit(_location);
         }
 
         private void OpenChest()

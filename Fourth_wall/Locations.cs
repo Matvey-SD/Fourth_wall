@@ -40,7 +40,7 @@ namespace Fourth_wall
 
             var chest = new Chest(450, 260);
 
-            var hero = new Hero(75, 250, 15, 6, 20);
+            var hero = new Hero(75, 250, 15, 6, 20, 2);
 
             var exit = new Exit(450, 0, CreateSecondLocation());
             
@@ -87,7 +87,7 @@ namespace Fourth_wall
 
             var chest = new Chest(450, 260);
 
-            var hero = new Hero(30, 150, 15, 6, 20);
+            var hero = new Hero(30, 150, 15, 6, 20, 1);
 
             var exit = new Exit(450, 0, CreateThirdLocation());
             
@@ -100,10 +100,7 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                Enemies.CreateLightEnemy(60, 150), 
-                Enemies.CreateLightEnemy(100, 149), 
-                Enemies.CreateHeavyEnemy(349, 130),
-                Enemies.CreateHeavyEnemy(350, 170)
+                
             };
             
             var walls = new List<Wall>()
@@ -117,15 +114,12 @@ namespace Fourth_wall
 
             var destructibleObjects = new List<DestructibleObject>()
             {
-                new DestructibleObject(160, 20, 20, 20, 8),
-                new DestructibleObject(160, 40, 20, 20, 8),
-                new DestructibleObject(160, 60, 20, 20, 8),
-                new DestructibleObject(160, 80, 20, 20, 8)
+                
             };
 
             var chest = new Chest(450, 150);
 
-            var hero = new Hero(80, 250, 15, 6, 20);
+            var hero = new Hero(80, 250, 15, 6, 20, 1);
 
             var exit = new Exit(450, 0);
             

@@ -9,6 +9,7 @@ namespace Fourth_wall.Game_Objects
     {
         public EnemyType Type { get; }
         private int _hp;
+        public int Speed { get; private set;}
         private readonly int _fov = 100;
         private readonly int _atcRange = 15;
         public bool IsTriggered { get; private set; }
@@ -24,12 +25,30 @@ namespace Fourth_wall.Game_Objects
         {
             _hp = hp;
             Type = type;
+            switch (type)
+            {
+                case EnemyType.Light:
+                    Speed = 2;
+                    break;
+                case EnemyType.Heavy:
+                    Speed = 1;
+                    break;
+            }
         }
 
         public Enemy(int x, int y, int hp, EnemyType type) : base(x, y)
         {
             _hp = hp;
             Type = type;
+            switch (type)
+            {
+                case EnemyType.Light:
+                    Speed = 2;
+                    break;
+                case EnemyType.Heavy:
+                    Speed = 1;
+                    break;
+            }
         }
         #endregion
         
@@ -75,24 +94,22 @@ namespace Fourth_wall.Game_Objects
         }
 
         private void Die() => IsDead = true;
-
         
-        // TODO Movement speed
         public void Move(Directions direction)
         {
             switch (direction)
             {
                 case Directions.Down:
-                    ChangeLocation(0, 1);
+                    ChangeLocation(0, Speed);
                     break;
                 case Directions.Up:
-                    ChangeLocation(0, -1);
+                    ChangeLocation(0, -Speed);
                     break;
                 case Directions.Left:
-                    ChangeLocation(-1, 0);
+                    ChangeLocation(-Speed, 0);
                     break;
                 case Directions.Right:
-                    ChangeLocation(1, 0);
+                    ChangeLocation(Speed, 0);
                     break;
             }
         }

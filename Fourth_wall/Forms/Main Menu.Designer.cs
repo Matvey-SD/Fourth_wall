@@ -1,4 +1,6 @@
-﻿namespace Fourth_wall
+﻿using System.Drawing;
+
+namespace Fourth_wall
 {
     sealed partial class MainMenu
     {
@@ -31,6 +33,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            BackgroundImage = Image.FromFile(@"..\..\Resources\Background.png");
             this.Text = "MainMenu";
         }
 

@@ -10,11 +10,13 @@ namespace Fourth_wall.Game_Objects
         //TODO Stamina, stamina change, stamina regen, block, diagonal moves
         
         private int MaxHp => 15;
+        private int MaxStamina => 200;
         public int Hp { get; private set; }
         private readonly int _damage;
         public int DamageBoost { get; private set; }
         private readonly int _range;
         public int Stamina { get; private set; }
+        public int Speed { get; private set;}
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
@@ -25,20 +27,22 @@ namespace Fourth_wall.Game_Objects
         private int FullDamage => _damage + DamageBoost;
         
         #region Constructor
-        public Hero(Point location, int hp, int damage, int range) : base(location)
+        public Hero(Point location, int hp, int damage, int range, int speed) : base(location)
         {
             Hp = hp;
             _damage = damage;
             _range = range;
             DamageBoost = 0;
+            Speed = speed;
         }
 
-        public Hero(int x, int y, int hp, int damage, int range) : base(x, y)
+        public Hero(int x, int y, int hp, int damage, int range, int speed) : base(x, y)
         {
             Hp = hp;
             _damage = damage;
             _range = range;
             DamageBoost = 0;
+            Speed = speed;
         }
         #endregion
 
@@ -90,18 +94,18 @@ namespace Fourth_wall.Game_Objects
             switch (direction)
             {
                 case Directions.Down:
-                    ChangeLocation(0, 1);
+                    ChangeLocation(0, Speed);
                     break;
                 case Directions.Up:
-                    ChangeLocation(0, -1);
+                    ChangeLocation(0, -Speed);
                     break;
                 case Directions.Left:
                     LastDirection = Directions.Left;
-                    ChangeLocation(-1, 0);
+                    ChangeLocation(-Speed, 0);
                     break;
                 case Directions.Right:
                     LastDirection = Directions.Right;
-                    ChangeLocation(1, 0);
+                    ChangeLocation(Speed, 0);
                     break;
             }
         }
