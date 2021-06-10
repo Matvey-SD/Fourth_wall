@@ -210,33 +210,6 @@ namespace Fourth_wall
         private Size ScreenSize(Size gameObjectSize) => 
             new Size(ClientSize.Width * gameObjectSize.Width / 500, ClientSize.Height * gameObjectSize.Height / 300);
 
-        /*private void GameStage_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // TODO More Inputs (Diagonal movement, block, sprint)
-            switch (e.KeyChar)
-            {
-                case 'w' :
-                    _location.TryMoveHero(Directions.Up);
-                    break;
-                case 's' :
-                    _location.TryMoveHero(Directions.Down);
-                    break;
-                case 'd' :
-                    _location.TryMoveHero(Directions.Right);   
-                    break;
-                case 'a' :
-                    _location.TryMoveHero(Directions.Left);
-                    break;
-                case (char)27:          //ESC
-                    _isExitByEsc = true; 
-                    Application.Exit();
-                    break;
-                case (char)32:          //SPACE
-                    _location.Hero.Hit(_location);
-                    break;
-            }
-        }*/
-        
         private void ReadInput()
         {
             // TODO More Inputs (Block, sprint)
