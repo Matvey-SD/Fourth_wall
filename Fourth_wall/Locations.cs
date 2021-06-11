@@ -100,7 +100,7 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                
+                Enemies.CreateBoss(450, 150)
             };
             
             var walls = new List<Wall>()

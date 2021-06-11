@@ -73,10 +73,11 @@ namespace Fourth_wall
                 if (!_location.Hero.IsDead)
                 {
                     ReadInput();
-                    ChangeLocation();
+                    ChangeLevel();
                     _location.EnemiesSearchForHero();
                     _location.EnemiesAttackHero();
                     _location.MoveEnemies();
+                    _location.Hero.RegenStamina();
                     _info.Text = PrintInfo();
                     OpenChest();
                     Invalidate();
@@ -104,6 +105,8 @@ namespace Fourth_wall
             PrintHero(e);
 
             PrintHp(e);
+            
+            PrintStamina(e);
         }
 
         private void PrintWall(PaintEventArgs e, Wall wall)
@@ -173,6 +176,13 @@ namespace Fourth_wall
             e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(5, 5, 200, 20));
             e.Graphics.FillRectangle(new SolidBrush(Color.DarkRed),
                 new Rectangle(5, 5, (200*_location.Hero.Hp)/15, 20));
+        }
+
+        private void PrintStamina(PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.Black), new Rectangle(5, 30, 200, 20));
+            e.Graphics.FillRectangle(new SolidBrush(Color.DarkBlue),
+                new Rectangle(5, 30, (200*_location.Hero.Stamina)/200, 20));
         }
         
         private Bitmap GetScaledImage(int width, int height, Image image)
@@ -244,7 +254,7 @@ namespace Fourth_wall
             }
         }
         
-        private void ChangeLocation()
+        private void ChangeLevel()
         {
             if (_location.LeavingMap())
             {
@@ -264,6 +274,7 @@ namespace Fourth_wall
             else return "";
         }
 
+        // TODO Game Close Rework 
         private void GameRestart()
         {
             new MainMenu().Show();

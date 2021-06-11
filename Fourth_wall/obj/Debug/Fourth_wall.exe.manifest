@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fourth_wall.exe" size="780776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fourth_wall.exe" size="781288">
       <assemblyIdentity name="Fourth_wall" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+ziyfKkT3ykBEnZbF+Z0N14cR61dKVcNOplL/glBprw=</dsig:DigestValue>
+        <dsig:DigestValue>2VLBZhcp7lQUbKFdavKYPQSVoCHVCXI2gNPVp169MQc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

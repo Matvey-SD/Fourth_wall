@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Fourth_wall.Game_Objects
 {
     public class Hero : GameObject, ICreature
     {
-        //TODO Stamina, stamina change, stamina regen, block, diagonal moves
+        //TODO Stamina change, block, sprint
         
         private int MaxHp => 15;
         private int MaxStamina => 200;
+        public bool CanRegenStamina { get; private set; } = false;
+        private int _staminaTimer;
         public int Hp { get; private set; }
+        public int Stamina { get; private set; }
         private readonly int _damage;
         public int DamageBoost { get; private set; }
         private readonly int _range;
-        public int Stamina { get; private set; }
         public int Speed { get; private set;}
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
@@ -30,6 +33,7 @@ namespace Fourth_wall.Game_Objects
         public Hero(Point location, int hp, int damage, int range, int speed) : base(location)
         {
             Hp = hp;
+            Stamina = MaxStamina;
             _damage = damage;
             _range = range;
             DamageBoost = 0;
@@ -39,6 +43,7 @@ namespace Fourth_wall.Game_Objects
         public Hero(int x, int y, int hp, int damage, int range, int speed) : base(x, y)
         {
             Hp = hp;
+            Stamina = MaxStamina;
             _damage = damage;
             _range = range;
             DamageBoost = 0;
@@ -54,11 +59,25 @@ namespace Fourth_wall.Game_Objects
             yield return new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
         }
 
+        public void RegenStamina()
+        {
+            if (CanRegenStamina && Stamina<= MaxStamina) Stamina += 2;
+            if (_staminaTimer < 20)
+            {
+                _staminaTimer++;
+            }
+            else CanRegenStamina = true;
+        }
+
         public void Hit(Location level)
         {
-            if (_isAttackCooldown)
+            if (_isAttackCooldown || Stamina <= 50)
                 return;
-            
+
+            Stamina -= 50;
+            CanRegenStamina = false;
+            _staminaTimer = 0;
+
             foreach (var destructObj in level.DestructibleObjects)
             {
                 var x = MiddlePoint.X - destructObj.MiddlePoint.X;

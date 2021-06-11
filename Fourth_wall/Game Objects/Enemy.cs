@@ -48,6 +48,12 @@ namespace Fourth_wall.Game_Objects
                 case EnemyType.Heavy:
                     Speed = 1;
                     break;
+                case EnemyType.Boss:
+                    Speed = 1;
+                    break;
+                default:
+                    Speed = 1;
+                    break;
             }
         }
         #endregion
