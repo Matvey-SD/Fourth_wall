@@ -95,9 +95,7 @@ namespace Fourth_wall
                     {
                         if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y +
                                                                     (isRunning ? 2*target.Speed : target.Speed))))
-                        {
                             return false;
-                        }
                     }
                     break;
                 }
@@ -107,9 +105,7 @@ namespace Fourth_wall
                     {
                         if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y - 
                                                                     (isRunning ? 2*target.Speed : target.Speed))))
-                        {
                             return false;
-                        }
                     }
                     break;
                 }
@@ -119,9 +115,7 @@ namespace Fourth_wall
                     {
                         if (!IsSpaceFree(new Point(colliderPoint.X - 
                                                    (isRunning ? 2*target.Speed : target.Speed), colliderPoint.Y)))
-                        {
                             return false;
-                        }
                     }
                     break;
                 }
@@ -131,9 +125,7 @@ namespace Fourth_wall
                     {
                         if (!IsSpaceFree(new Point(colliderPoint.X + 
                                                    (isRunning ? 2*target.Speed : target.Speed), colliderPoint.Y)))
-                        {
                             return false;
-                        }
                     }
                     break;
                 }

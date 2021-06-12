@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Media;
 
 namespace Fourth_wall
 {
@@ -48,6 +49,9 @@ namespace Fourth_wall
             _chestClosedImage = Image.FromFile(@"..\..\Resources\ChestClosed.png");
             _chestOpenedImage = Image.FromFile(@"..\..\Resources\ChestOpened.png");
             _holeImage = Image.FromFile(@"..\..\Resources\Hole.png");
+            
+            _hitSound = new SoundPlayer(@"..\..\Resources\Sounds\Hit.wav");
+            _explosionSound = new SoundPlayer(@"..\..\Resources\Sounds\Explosion.wav");
         }
 
         #endregion
@@ -64,5 +68,8 @@ namespace Fourth_wall
         private Image _chestClosedImage;
         private Image _chestOpenedImage;
         private Image _holeImage;
+
+        private SoundPlayer _hitSound;
+        private SoundPlayer _explosionSound;
     }
 }

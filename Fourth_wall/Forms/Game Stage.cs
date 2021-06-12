@@ -236,8 +236,12 @@ namespace Fourth_wall
                 _isExitByEsc = true; 
                 Application.Exit();
             }
-            if (Keyboard.IsKeyDown(Key.Space))
+
+            if (Keyboard.IsKeyDown(Key.Space) && !_location.Hero.IsAttackCooldown)
+            {
                 _location.Hero.Hit(_location);
+                _hitSound.Play();
+            }
         }
 
         private void OpenChest()

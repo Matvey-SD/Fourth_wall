@@ -23,7 +23,7 @@ namespace Fourth_wall.Game_Objects
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
-        private bool _isAttackCooldown;
+        public bool IsAttackCooldown;
         public bool IsAttackAnimation { get; private set; }
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
@@ -71,7 +71,7 @@ namespace Fourth_wall.Game_Objects
 
         public void Hit(Location level)
         {
-            if (_isAttackCooldown || Stamina <= 50)
+            if (Stamina <= 50)
                 return;
 
             ChangeStamina(50);
@@ -94,7 +94,7 @@ namespace Fourth_wall.Game_Objects
                     enemy.HpChange(FullDamage);
             }
             
-            _isAttackCooldown = true;
+            IsAttackCooldown = true;
             IsAttackAnimation = true;
             
             Task.Run(async () =>
@@ -102,7 +102,7 @@ namespace Fourth_wall.Game_Objects
                 await Task.Delay(500);
                 IsAttackAnimation = false;
                 await Task.Delay(500);
-                _isAttackCooldown = false;
+                IsAttackCooldown = false;
             });
         }
         
