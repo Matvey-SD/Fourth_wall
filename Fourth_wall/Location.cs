@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Fourth_wall.Game_Objects;
 
 namespace Fourth_wall
@@ -34,11 +35,11 @@ namespace Fourth_wall
         }
 
         public Location(List<Enemy> enemies, IEnumerable<Wall> walls, 
-            List<DestructibleObject> destructibleObjectses, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
+            List<DestructibleObject> destructibleObjects, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
         {
             Enemies = enemies;
             Walls = walls;
-            DestructibleObjects = destructibleObjectses;
+            DestructibleObjects = destructibleObjects;
             Hero = hero;
             IsFirstLocation = isFirstLocation;
             Exit = exit;
@@ -62,28 +63,29 @@ namespace Fourth_wall
             if (!enemy.IsDead && enemy.IsTriggered)
             {
                 if (!enemy.TooCloseToHero(this) && 
-                    enemy.MiddlePoint.X < Hero.MiddlePoint.X && IsThereSpaceToMove(Directions.Right, enemy))
+                    enemy.MiddlePoint.X < Hero.MiddlePoint.X && IsThereSpaceToMove(Directions.Right, enemy, false))
                     enemy.Move(Directions.Right);
                 else if (!enemy.TooCloseToHero(this) && 
-                    enemy.MiddlePoint.X > Hero.MiddlePoint.X && IsThereSpaceToMove(Directions.Left, enemy)) 
+                    enemy.MiddlePoint.X > Hero.MiddlePoint.X && IsThereSpaceToMove(Directions.Left, enemy, false)) 
                     enemy.Move(Directions.Left);
 
                 if (!enemy.TooCloseToHero(this) && 
-                    enemy.MiddlePoint.Y > Hero.MiddlePoint.Y && IsThereSpaceToMove(Directions.Up, enemy)) 
+                    enemy.MiddlePoint.Y > Hero.MiddlePoint.Y && IsThereSpaceToMove(Directions.Up, enemy, false)) 
                     enemy.Move(Directions.Up);
                 else if (!enemy.TooCloseToHero(this) && 
-                    enemy.MiddlePoint.Y < Hero.MiddlePoint.Y && IsThereSpaceToMove(Directions.Down, enemy)) 
+                    enemy.MiddlePoint.Y < Hero.MiddlePoint.Y && IsThereSpaceToMove(Directions.Down, enemy, false)) 
                     enemy.Move(Directions.Down);
             }
         }
         
         public void TryMoveHero(Directions direction)
         {
-            if (IsThereSpaceToMove(direction, Hero)) Hero.Move(direction);
+            var isRunning = Keyboard.IsKeyDown(Key.LeftShift);
+            if (IsThereSpaceToMove(direction, Hero, isRunning)) Hero.Move(direction, isRunning);
         }
 
         
-        private bool IsThereSpaceToMove(Directions direction, ICreature target)
+        private bool IsThereSpaceToMove(Directions direction, ICreature target, bool isRunning)
         {
             switch (direction)
             {
@@ -91,7 +93,8 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y + target.Speed)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y +
+                                                                    (isRunning ? 2*target.Speed : target.Speed))))
                         {
                             return false;
                         }
@@ -102,7 +105,8 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y - target.Speed)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X, colliderPoint.Y - 
+                                                                    (isRunning ? 2*target.Speed : target.Speed))))
                         {
                             return false;
                         }
@@ -113,7 +117,8 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X - target.Speed, colliderPoint.Y)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X - 
+                                                   (isRunning ? 2*target.Speed : target.Speed), colliderPoint.Y)))
                         {
                             return false;
                         }
@@ -124,7 +129,8 @@ namespace Fourth_wall
                 {
                     foreach (var colliderPoint in target.ColliderBorders())
                     {
-                        if (!IsSpaceFree(new Point(colliderPoint.X + target.Speed, colliderPoint.Y)))
+                        if (!IsSpaceFree(new Point(colliderPoint.X + 
+                                                   (isRunning ? 2*target.Speed : target.Speed), colliderPoint.Y)))
                         {
                             return false;
                         }

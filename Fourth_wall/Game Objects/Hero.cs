@@ -74,9 +74,7 @@ namespace Fourth_wall.Game_Objects
             if (_isAttackCooldown || Stamina <= 50)
                 return;
 
-            Stamina -= 50;
-            CanRegenStamina = false;
-            _staminaTimer = 0;
+            ChangeStamina(50);
 
             foreach (var destructObj in level.DestructibleObjects)
             {
@@ -108,25 +106,35 @@ namespace Fourth_wall.Game_Objects
             });
         }
         
-        public void Move(Directions direction)
+        public void Move(Directions direction, bool isRunning)
         {
+            if (Stamina < 2) isRunning = false;
+
+            if (isRunning) ChangeStamina(2);
             switch (direction)
             {
                 case Directions.Down:
-                    ChangeLocation(0, Speed);
+                    ChangeLocation(0,  (isRunning? 2:1)*Speed);
                     break;
                 case Directions.Up:
-                    ChangeLocation(0, -Speed);
+                    ChangeLocation(0, -(isRunning? 2:1)*Speed);
                     break;
                 case Directions.Left:
                     LastDirection = Directions.Left;
-                    ChangeLocation(-Speed, 0);
+                    ChangeLocation(-(isRunning? 2:1)*Speed, 0);
                     break;
                 case Directions.Right:
                     LastDirection = Directions.Right;
-                    ChangeLocation(Speed, 0);
+                    ChangeLocation((isRunning? 2:1)*Speed, 0);
                     break;
             }
+        }
+
+        private void ChangeStamina(int value)
+        {
+            Stamina -= value;
+            CanRegenStamina = false;
+            _staminaTimer = 0;
         }
 
         public void HpRemove()

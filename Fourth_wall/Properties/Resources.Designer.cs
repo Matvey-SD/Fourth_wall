@@ -134,7 +134,7 @@ namespace Fourth_wall.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Управление: WASD - движение, SPACE - удар. Всё просто!.
+        ///   Looks up a localized string similar to Управление: WASD - движение, SHIFT бег, SPACE - удар. Всё просто!.
         /// </summary>
         internal static string Info {
             get {
