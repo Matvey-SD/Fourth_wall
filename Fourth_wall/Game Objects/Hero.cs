@@ -25,6 +25,7 @@ namespace Fourth_wall.Game_Objects
         public readonly Size Collider = new Size(19, 19);
         public bool IsAttackCooldown;
         public bool IsAttackAnimation { get; private set; }
+        public bool CanAttack => !IsAttackCooldown && Stamina >= 50;
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
         private int FullDamage => _damage + DamageBoost;

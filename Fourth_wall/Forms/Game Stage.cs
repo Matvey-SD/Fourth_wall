@@ -225,11 +225,12 @@ namespace Fourth_wall
             // TODO More Inputs (Block, sprint)
             if (Keyboard.IsKeyDown(Key.W))
                 _location.TryMoveHero(Directions.Up);
-            if (Keyboard.IsKeyDown(Key.S))
+            else if (Keyboard.IsKeyDown(Key.S))
                 _location.TryMoveHero(Directions.Down);
+            
             if (Keyboard.IsKeyDown(Key.D))
                 _location.TryMoveHero(Directions.Right);
-            if (Keyboard.IsKeyDown(Key.A))
+            else if (Keyboard.IsKeyDown(Key.A))
                 _location.TryMoveHero(Directions.Left);
             if (Keyboard.IsKeyDown(Key.Escape))
             {
@@ -237,7 +238,7 @@ namespace Fourth_wall
                 Application.Exit();
             }
 
-            if (Keyboard.IsKeyDown(Key.Space) && !_location.Hero.IsAttackCooldown)
+            if (Keyboard.IsKeyDown(Key.Space) && _location.Hero.CanAttack)
             {
                 _location.Hero.Hit(_location);
                 _hitSound.Play();
