@@ -86,7 +86,6 @@ namespace Fourth_wall
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            // TODO More animations
             foreach (var wall in _location.Walls)
                 PrintWall(e, wall);
             
@@ -141,15 +140,30 @@ namespace Fourth_wall
 
         private void PrintEnemy(PaintEventArgs e, Enemy enemy)
         {
-            e.Graphics.DrawImage(
-                enemy.IsDead
-                    ? GetScaledImage(ScreenSize(enemy.Collider), _deadEnemy)
-                    : GetScaledImage(ScreenSize(enemy.Collider), _enemyImage),
-                ScreenCoordinates(enemy));
-            if (enemy.Type == EnemyType.Heavy && !enemy.IsDead)
+            if (enemy.LastDirection == Directions.Right)
             {
-                e.Graphics.DrawRectangle(new Pen(Color.Gold), 
-                    new Rectangle(ScreenCoordinates(enemy.Location), new Size(ScreenSize(enemy.Collider).Width, 1)));
+                e.Graphics.DrawImage(GetScaledImage(ScreenSize(enemy.Collider), 
+                        enemy.IsDead
+                            ? _deadEnemyRight
+                            : enemy.IsAttackAnimation 
+                                ? _enemyAttackRight 
+                                : enemy.IsStandingAnimation 
+                                    ? _enemyStandRightImage
+                                    : _enemyRunRightImages[enemy.NextAnimation()]), 
+                    ScreenCoordinates(enemy));
+            }
+            else 
+            {
+                e.Graphics.DrawImage(GetScaledImage(ScreenSize(enemy.Collider), 
+                        enemy.IsDead
+                            ? _deadEnemyLeft
+                            : enemy.IsAttackAnimation 
+                                ? _enemyAttackLeft 
+                                : enemy.IsStandingAnimation 
+                                    ? _enemyStandLeftImage
+                                    : _enemyRunLeftImages[enemy.NextAnimation()]), 
+                    ScreenCoordinates(enemy));
+                
             }
         }
 
@@ -234,7 +248,6 @@ namespace Fourth_wall
 
         private void ReadInput()
         {
-            // TODO More Inputs (Block)
             _location.Hero.IsStandingAnimation = true;
             if (Keyboard.IsKeyDown(Key.W))
             {

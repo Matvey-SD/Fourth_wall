@@ -8,8 +8,6 @@ namespace Fourth_wall.Game_Objects
 {
     public class Hero : GameObject, ICreature
     {
-        //TODO Block
-        
         private int MaxHp => 15;
         private int MaxStamina => 200;
         private bool CanRegenStamina { get; set; }
@@ -18,39 +16,35 @@ namespace Fourth_wall.Game_Objects
         public int Stamina { get; private set; }
         private readonly int _damage;
         public int DamageBoost { get; private set; }
-        private readonly int _range;
-        public int Speed { get; }
+        private int _range => 3;
+        public int Speed => 2;
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
         private bool _isAttackCooldown;
         public bool IsAttackAnimation { get; private set; }
         public bool IsStandingAnimation { get; set; }
-        public int AnimationCounter { get; set; } = 0;
+        private int AnimationCounter { get; set; }
         public bool CanAttack => !_isAttackCooldown && Stamina >= 50;
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
         private int FullDamage => _damage + DamageBoost;
         
         #region Constructor
-        public Hero(Point location, int hp, int damage, int range, int speed) : base(location)
+        public Hero(Point location, int hp, int damage) : base(location)
         {
             Hp = hp;
             Stamina = MaxStamina;
             _damage = damage;
-            _range = range;
             DamageBoost = 0;
-            Speed = speed;
         }
 
-        public Hero(int x, int y, int hp, int damage, int range, int speed) : base(x, y)
+        public Hero(int x, int y, int hp, int damage) : base(x, y)
         {
             Hp = hp;
             Stamina = MaxStamina;
             _damage = damage;
-            _range = range;
             DamageBoost = 0;
-            Speed = speed;
         }
         #endregion
 
@@ -88,7 +82,7 @@ namespace Fourth_wall.Game_Objects
                 var x = MiddlePoint.X - destructObj.MiddlePoint.X;
                 var y = MiddlePoint.Y - destructObj.MiddlePoint.Y;
                 if (Math.Sqrt(x * x + y * y) <= _range + 
-                    (destructObj.Collider.Height + destructObj.Collider.Width + Collider.Height + Collider.Width)/4) 
+                    (destructObj.Collider.Height + destructObj.Collider.Width + Collider.Height + Collider.Width)/2) 
                     destructObj.HpChange(FullDamage);
             }
 
@@ -97,7 +91,7 @@ namespace Fourth_wall.Game_Objects
                 var x = MiddlePoint.X - enemy.MiddlePoint.X;
                 var y = MiddlePoint.Y - enemy.MiddlePoint.Y;
                 if (Math.Sqrt(x * x + y * y) <= _range + 
-                    (enemy.Collider.Height + enemy.Collider.Width + Collider.Height + Collider.Width)/4)
+                    (enemy.Collider.Height + enemy.Collider.Width + Collider.Height + Collider.Width)/2)
                     enemy.HpChange(FullDamage);
             }
             

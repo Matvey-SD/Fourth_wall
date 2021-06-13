@@ -58,8 +58,31 @@ namespace Fourth_wall
             _heroStandLeftImage = Image.FromFile(@"..\..\Resources\Hero\HeroStandLeft.png");
             _heroAttackLeftImage = Image.FromFile(@"..\..\Resources\Hero\HeroAttackLeft.png");
             
-            _enemyImage = Image.FromFile(@"..\..\Resources\Enemy\Enemy.png");
-            _deadEnemy = Image.FromFile(@"..\..\Resources\Enemy\DeadEnemy.png");
+            _enemyStandLeftImage = Image.FromFile(@"..\..\Resources\Enemy\EnemyStandLeft.png");
+            _enemyStandRightImage = Image.FromFile(@"..\..\Resources\Enemy\EnemyStandRight.png");
+            
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft0.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft1.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft2.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft3.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft4.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft5.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft6.png"));
+            _enemyRunLeftImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunLeft7.png"));
+            
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight0.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight1.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight2.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight3.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight4.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight5.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight6.png"));
+            _enemyRunRightImages.Add(Image.FromFile(@"..\..\Resources\Enemy\EnemyRunRight7.png"));
+            
+            _enemyAttackLeft = Image.FromFile(@"..\..\Resources\Enemy\EnemyAttackLeft.png");
+            _enemyAttackRight = Image.FromFile(@"..\..\Resources\Enemy\EnemyAttackRight.png");
+            _deadEnemyLeft = Image.FromFile(@"..\..\Resources\Enemy\DeadEnemyLeft.png");
+            _deadEnemyRight = Image.FromFile(@"..\..\Resources\Enemy\DeadEnemyRight.png");
             
             _wallImage = Image.FromFile(@"..\..\Resources\Wall.png");
             
@@ -90,8 +113,14 @@ namespace Fourth_wall
         private List<Image> _heroRunLeftImages = new List<Image>();
         private Image _heroAttackLeftImage;
         
-        private Image _enemyImage;
-        private Image _deadEnemy;
+        private Image _enemyStandLeftImage;
+        private List<Image> _enemyRunLeftImages = new List<Image>();
+        private Image _enemyStandRightImage;
+        private List<Image> _enemyRunRightImages = new List<Image>();
+        private Image _enemyAttackLeft;
+        private Image _enemyAttackRight;
+        private Image _deadEnemyLeft;
+        private Image _deadEnemyRight;
         
         private Image _wallImage;
         

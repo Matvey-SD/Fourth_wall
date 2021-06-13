@@ -146,7 +146,7 @@
     <value>Управление: WASD - движение, SHIFT бег, SPACE - удар. Всё просто!</value>
   </data>
   <data name="GameEndsText" xml:space="preserve">
-    <value>Поздравляю, вы прошли игру. Вау, да вы круты.</value>
+    <value>Поздравляю, вы прошли игру. Вау, да вы круты. Спасибо что играли в демоверсию моей игры, за обновлениями можете следить по ссылке https://github.com/Matvey-SD/Fourth_wall</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Выход</value>
