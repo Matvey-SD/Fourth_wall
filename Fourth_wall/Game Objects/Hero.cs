@@ -8,7 +8,7 @@ namespace Fourth_wall.Game_Objects
 {
     public class Hero : GameObject, ICreature
     {
-        //TODO Stamina change, block, sprint
+        //TODO Block
         
         private int MaxHp => 15;
         private int MaxStamina => 200;
@@ -62,7 +62,11 @@ namespace Fourth_wall.Game_Objects
 
         public void RegenStamina()
         {
-            if (CanRegenStamina && Stamina<= MaxStamina) Stamina += 2;
+            if (CanRegenStamina && Stamina <= MaxStamina)
+            {
+                Stamina += 2;
+                return;
+            }
             if (_staminaTimer < 20)
             {
                 _staminaTimer++;

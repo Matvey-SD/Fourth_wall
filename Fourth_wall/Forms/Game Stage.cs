@@ -13,8 +13,7 @@ namespace Fourth_wall
         private readonly Label _info;
 
         private bool _isExitByEsc;
-        private bool _isGamesEndsMessage;
-        private bool _isHidden;
+        private bool _isPaused;
 
         public GameStage(Location location)
         {
@@ -53,6 +52,7 @@ namespace Fourth_wall
                     {
                         eventArgs.Cancel = true;
                         _isExitByEsc = false;
+                        _isPaused = false;
                     }
                 }
             };
@@ -63,27 +63,23 @@ namespace Fourth_wall
                 _info.Size = ScreenSize(new Size(150, 130));
             };
 
-            Closed += (sender, args) => _isHidden = true;
+            Closed += (sender, args) => _isPaused = true;
         }
         
         private void Tick(object sender, EventArgs e)
         {
-            if (!_isHidden)
+            if (!_isPaused)
             {
-                if (!_location.Hero.IsDead)
-                {
-                    ReadInput();
-                    ChangeLevel();
-                    _location.EnemiesSearchForHero();
-                    _location.EnemiesAttackHero();
-                    _location.MoveEnemies();
-                    _location.Hero.RegenStamina();
-                    _info.Text = PrintInfo();
-                    OpenChest();
-                    Invalidate();
-                }
-                else
-                    GameRestart();
+                ReadInput();
+                ChangeLevel();
+                GameRestart();
+                _location.EnemiesSearchForHero();
+                _location.EnemiesAttackHero();
+                _location.MoveEnemies();
+                _location.Hero.RegenStamina();
+                _info.Text = PrintInfo();
+                OpenChest();
+                Invalidate();
             }
         }
 
@@ -222,7 +218,7 @@ namespace Fourth_wall
 
         private void ReadInput()
         {
-            // TODO More Inputs (Block, sprint)
+            // TODO More Inputs (Block)
             if (Keyboard.IsKeyDown(Key.W))
                 _location.TryMoveHero(Directions.Up);
             else if (Keyboard.IsKeyDown(Key.S))
@@ -234,7 +230,8 @@ namespace Fourth_wall
                 _location.TryMoveHero(Directions.Left);
             if (Keyboard.IsKeyDown(Key.Escape))
             {
-                _isExitByEsc = true; 
+                _isExitByEsc = true;
+                _isPaused = true;
                 Application.Exit();
             }
 
@@ -250,12 +247,14 @@ namespace Fourth_wall
             if (!_location.IsChestOpened && _location.CanOpenChest())
             {
                 _location.IsChestOpened = true;
+                _isPaused = true;
                 var result = MessageBox.Show(Resources.ChestOpen_Message, Resources.OpenChest, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button1);
                 if (result == DialogResult.Yes)
                     _location.Hero.BoostDamage();
                 else
                     _location.Hero.Heal();
+                _isPaused = false;
             }
         }
         
@@ -263,7 +262,11 @@ namespace Fourth_wall
         {
             if (_location.LeavingMap())
             {
-                if (_location.Exit.NextMap == null) GameEnd();
+                if (_location.Exit.NextMap == null)
+                {
+                    _isPaused = true;
+                    GameEnd();
+                }
                 else
                 {
                     _location.Exit.NextMap.SetHero(_location.Hero);
@@ -278,25 +281,28 @@ namespace Fourth_wall
                 return Resources.Info;
             else return "";
         }
-
-        // TODO Game Close Rework 
+        
         private void GameRestart()
         {
-            new MainMenu().Show();
-            Close();
-        }
-
-        private void GameEnd()
-        {
-            if (!_isGamesEndsMessage)
+            if (_location.Hero.IsDead)
             {
-                _isGamesEndsMessage = true;
-                var result = MessageBox.Show(Resources.GameEndsText, Resources.GameEnd, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _isPaused = true;
+                var result = MessageBox.Show(Resources.DeathMessage, Resources.GameEnd, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
                 {
                     new MainMenu().Show();
                     Close();
                 }
+            }
+        }
+
+        private void GameEnd()
+        {
+            var result = MessageBox.Show(Resources.GameEndsText, Resources.GameEnd, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (result == DialogResult.OK)
+            {
+                new MainMenu().Show();
+                Close();
             }
         }
     }

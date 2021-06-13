@@ -112,10 +112,7 @@ namespace Fourth_wall
                 new Wall(160, 100, 20, 200),
             };
 
-            var destructibleObjects = new List<DestructibleObject>()
-            {
-                
-            };
+            var destructibleObjects = new List<DestructibleObject>();
 
             var chest = new Chest(450, 150);
 
