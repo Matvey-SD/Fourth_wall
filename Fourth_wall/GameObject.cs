@@ -4,26 +4,17 @@ namespace Fourth_wall
 {
     public class GameObject
     {
-        private Point _location;
-
-        public Point Location => _location;
+        public Point Location { get; private set; }
 
         #region Constructor
 
-        protected GameObject(Point location)
-        {
-            _location = location;
-        }
+        protected GameObject(Point location) => Location = location;
 
-        protected GameObject(int x, int y)
-        {
-            _location = new Point(x, y);
-        }
+        protected GameObject(int x, int y) => Location = new Point(x, y);
+
         #endregion
 
-        protected void ChangeLocation(int x, int y)
-        {
-            _location = new Point(_location.X + x, _location.Y + y);
-        }
+        protected void ChangeLocation(int x, int y) => 
+            Location = new Point(Location.X + x, Location.Y + y);
     }
 }

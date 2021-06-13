@@ -25,7 +25,7 @@ namespace Fourth_wall
             Text = Resources.GameName;
             
             InitializeComponent();
-            var tickCounter = new Timer {Interval = 10};
+            var tickCounter = new Timer {Interval = 15};
             tickCounter.Tick += Tick;
             tickCounter.Start();
 
@@ -70,16 +70,17 @@ namespace Fourth_wall
         {
             if (!_isPaused)
             {
-                ReadInput();
                 ChangeLevel();
                 GameRestart();
+                ReadInput();
                 _location.EnemiesSearchForHero();
-                _location.EnemiesAttackHero();
+                _location.EnemiesAttackHero(_damageSound);
                 _location.MoveEnemies();
                 _location.Hero.RegenStamina();
                 _info.Text = PrintInfo();
                 OpenChest();
                 Invalidate();
+                PlaySounds();
             }
         }
 
@@ -123,7 +124,9 @@ namespace Fourth_wall
             e.Graphics.DrawImage(
                 destructibleObject.IsDestroyed
                     ? GetScaledImage(ScreenSize(destructibleObject.Collider), _brokenBoxImage)
-                    : GetScaledImage(ScreenSize(destructibleObject.Collider), _boxImage),
+                    : destructibleObject.isDamaged
+                        ? GetScaledImage(ScreenSize(destructibleObject.Collider), _damagedBoxImage)
+                        : GetScaledImage(ScreenSize(destructibleObject.Collider), _boxImage),
                 new Rectangle(ScreenCoordinates(destructibleObject), ScreenSize(destructibleObject.Collider)));
         }
 
@@ -156,14 +159,18 @@ namespace Fourth_wall
             {
                 e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
                         _location.Hero.IsAttackAnimation
-                            ?_heroAttackImage
-                            : _heroImage), 
+                            ?_heroAttackRightImage
+                            : _location.Hero.IsStandingAnimation 
+                                ? _heroStandRightImage 
+                                : _heroRunRightImages[_location.Hero.NextAnimation()]), 
                     ScreenCoordinates(_location.Hero));
             }
             else e.Graphics.DrawImage(GetScaledImage(ScreenSize(_location.Hero.Collider), 
                     _location.Hero.IsAttackAnimation
                         ?_heroAttackLeftImage
-                        : _heroLeftImage), 
+                        : _location.Hero.IsStandingAnimation 
+                            ? _heroStandLeftImage 
+                            : _heroRunLeftImages[_location.Hero.NextAnimation()]), 
                 ScreenCoordinates(_location.Hero));
         }
 
@@ -180,7 +187,16 @@ namespace Fourth_wall
             e.Graphics.FillRectangle(new SolidBrush(Color.DarkBlue),
                 new Rectangle(5, 30, (200*_location.Hero.Stamina)/200, 20));
         }
-        
+
+        private void PlaySounds()
+        {
+            if (_location.LastIterationLivingMonsters > _location.LivingMonstersCount) _monsterDeathSound.Play();
+            _location.LastIterationLivingMonsters = _location.LivingMonstersCount;
+            if (_location.LastIterationBoxes > _location.BoxesCount) _boxDestructionSound.Play();
+            _location.LastIterationBoxes = _location.BoxesCount;
+            
+        }
+
         private Bitmap GetScaledImage(int width, int height, Image image)
         {
             var bmp = new Bitmap(width, height);
@@ -219,15 +235,29 @@ namespace Fourth_wall
         private void ReadInput()
         {
             // TODO More Inputs (Block)
+            _location.Hero.IsStandingAnimation = true;
             if (Keyboard.IsKeyDown(Key.W))
+            {
                 _location.TryMoveHero(Directions.Up);
+                _location.Hero.IsStandingAnimation = false;
+            }
             else if (Keyboard.IsKeyDown(Key.S))
+            {
                 _location.TryMoveHero(Directions.Down);
-            
+                _location.Hero.IsStandingAnimation = false;
+            }
+
             if (Keyboard.IsKeyDown(Key.D))
+            {
                 _location.TryMoveHero(Directions.Right);
+                _location.Hero.IsStandingAnimation = false;
+            }
             else if (Keyboard.IsKeyDown(Key.A))
+            {
                 _location.TryMoveHero(Directions.Left);
+                _location.Hero.IsStandingAnimation = false;
+            }
+                
             if (Keyboard.IsKeyDown(Key.Escape))
             {
                 _isExitByEsc = true;
@@ -246,7 +276,7 @@ namespace Fourth_wall
         {
             if (!_location.IsChestOpened && _location.CanOpenChest())
             {
-                _chestSound.PlaySync();
+                _chestSound.Play();
                 _location.IsChestOpened = true;
                 _isPaused = true;
                 var result = MessageBox.Show(Resources.ChestOpen_Message, Resources.OpenChest, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
@@ -261,7 +291,7 @@ namespace Fourth_wall
         
         private void ChangeLevel()
         {
-            if (_location.LeavingMap())
+            if (_location.LeavingMap)
             {
                 if (_location.Exit.NextMap == null)
                 {
@@ -287,7 +317,7 @@ namespace Fourth_wall
         {
             if (_location.Hero.IsDead)
             {
-                _deathSound.Play();
+                _deathSound.PlaySync();
                 _isPaused = true;
                 var result = MessageBox.Show(Resources.DeathMessage, Resources.GameEnd, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)

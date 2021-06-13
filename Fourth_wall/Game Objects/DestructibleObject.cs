@@ -9,6 +9,7 @@ namespace Fourth_wall.Game_Objects
         private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
         public Point MiddlePoint => new Point(Location.X + Collider.Width / 2, Location.Y + Collider.Height / 2);
         public bool IsDestroyed { get; private set; }
+        public bool isDamaged { get; private set; }
 
         #region Constructor
         
@@ -29,6 +30,7 @@ namespace Fourth_wall.Game_Objects
         public void HpChange(int hp)
         {
             _hp -= hp;
+            isDamaged = true;
             if (_hp <= 0)
                 Die();
         }

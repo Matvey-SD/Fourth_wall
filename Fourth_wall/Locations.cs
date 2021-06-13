@@ -10,9 +10,9 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                /*Enemies.CreateLightEnemy(450, 75), 
+                Enemies.CreateLightEnemy(450, 75), 
                 Enemies.CreateLightEnemy(450, 150), 
-                Enemies.CreateLightEnemy(450, 220)*/
+                Enemies.CreateLightEnemy(450, 220)
             };
             
             var walls = new List<Wall>()
@@ -100,7 +100,7 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                Enemies.CreateBoss(450, 150)
+                Enemies.CreateBoss(420, 150)
             };
             
             var walls = new List<Wall>()
@@ -109,7 +109,6 @@ namespace Fourth_wall
                 new Wall(0, 0, 500, 20), 
                 new Wall(490, 0, 10, 300), 
                 new Wall(0, 280, 500, 20),
-                new Wall(160, 100, 20, 200),
             };
 
             var destructibleObjects = new List<DestructibleObject>();

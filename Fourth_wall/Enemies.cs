@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Fourth_wall.Game_Objects;
+﻿using Fourth_wall.Game_Objects;
 
 namespace Fourth_wall
 {

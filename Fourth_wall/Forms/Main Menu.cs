@@ -29,7 +29,11 @@ namespace Fourth_wall
             {
                 Size = new Size(300, 60),
                 Text = Resources.MainMenu_Exit,
-                Font = new Font(Font.FontFamily, 20)
+                Font = new Font(Font.FontFamily, 20),
+                BackColor = Color.Maroon,
+                TabStop = false,
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0}
             };
             Controls.Add(exitButton);
             exitButton.Click += (sender, args) => Application.Exit();
@@ -39,7 +43,11 @@ namespace Fourth_wall
             {
                 Size = new Size(300, 60),
                 Text = Resources.MainMenu_Start + userName + @"?",
-                Font = new Font(Font.FontFamily, 20)
+                Font = new Font(Font.FontFamily, 20),
+                BackColor = Color.Green,
+                TabStop = false,
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0}
             };
             Controls.Add(startButton);
             startButton.Click += (sender, args) =>

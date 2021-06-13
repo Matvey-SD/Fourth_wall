@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Threading.Tasks;
 
 namespace Fourth_wall.Game_Objects
@@ -24,6 +25,8 @@ namespace Fourth_wall.Game_Objects
         public readonly Size Collider = new Size(19, 19);
         private bool _isAttackCooldown;
         public bool IsAttackAnimation { get; private set; }
+        public bool IsStandingAnimation { get; set; }
+        public int AnimationCounter { get; set; } = 0;
         public bool CanAttack => !_isAttackCooldown && Stamina >= 50;
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
@@ -156,5 +159,12 @@ namespace Fourth_wall.Game_Objects
         public void BoostDamage() => DamageBoost += 2;
 
         public void Heal() => Hp = MaxHp;
+
+        public int NextAnimation()
+        {
+            var value = AnimationCounter / 5;
+            AnimationCounter = (AnimationCounter + 1) % 30;
+            return value;
+        }
     }
 }

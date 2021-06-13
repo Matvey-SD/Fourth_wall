@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Fourth_wall.Game_Objects;
@@ -18,21 +19,36 @@ namespace Fourth_wall
         public readonly Exit Exit;
         private readonly Size _size = new Size(500, 300);
         public bool IsChestOpened = false;
-        public bool IsAllEnemiesDead
+        public int LastIterationBoxes;
+        public int BoxesCount
         {
             get
             {
-                foreach (var enemy in Enemies)
-                {
-                    if (!enemy.IsDead)
-                    {
-                        return false;
-                    }
-                }
+                var value = 0;
+                foreach (var box in DestructibleObjects)
+                    if (!box.IsDestroyed)
+                        value++;
 
-                return true;
+                return value; 
             }
         }
+        public int LastIterationLivingMonsters;
+        public int LivingMonstersCount
+        {
+            get
+            {
+                var value = 0;
+                foreach (var enemy in Enemies)
+                    if (!enemy.IsDead)
+                        value++;
+
+                return value; 
+            }
+        }
+        public bool IsAllEnemiesDead => LivingMonstersCount == 0;
+
+        public bool LeavingMap => IsAllEnemiesDead && Exit.IsHeroNear(Hero);
+        
 
         public Location(List<Enemy> enemies, IEnumerable<Wall> walls, 
             List<DestructibleObject> destructibleObjects, Chest chest, Hero hero, bool isFirstLocation, Exit exit)
@@ -44,6 +60,7 @@ namespace Fourth_wall
             IsFirstLocation = isFirstLocation;
             Exit = exit;
             Chest = chest;
+            LastIterationLivingMonsters = LivingMonstersCount;
         }
 
         public void SetHero(Hero hero)
@@ -162,20 +179,16 @@ namespace Fourth_wall
             Parallel.For(0, Enemies.Count(), i => { Enemies[i].HeroSearch(Hero); });
         }
 
-        public void EnemiesAttackHero()
+        public void EnemiesAttackHero(SoundPlayer damage)
         {
-            Parallel.For(0, Enemies.Count(), i => { Enemies[i].AttackHero(Hero); });
+            Parallel.For(0, Enemies.Count(), i => { Enemies[i].AttackHero(Hero, damage); });
         }
         
         public bool CanOpenChest()
         {
             return IsAllEnemiesDead && Chest.IsHeroNear(Hero);
         }
-
-        public bool LeavingMap()
-        {
-            return IsAllEnemiesDead && Exit.IsHeroNear(Hero);
-        }
+        
 
         private bool IsHeroInside() => Hero.MiddlePoint.X <= _size.Width && Hero.MiddlePoint.Y <= _size.Height;
     }

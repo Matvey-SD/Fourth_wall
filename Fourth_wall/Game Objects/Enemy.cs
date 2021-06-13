@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Threading.Tasks;
 
 namespace Fourth_wall.Game_Objects
@@ -82,8 +83,8 @@ namespace Fourth_wall.Game_Objects
         public void HpChange(int hp)
         {
             _hp -= hp;
-            if (_hp <= 0)
-                Die();
+            if (_hp <= 0) Die();
+
         }
 
         private void Die() => IsDead = true;
@@ -107,7 +108,7 @@ namespace Fourth_wall.Game_Objects
             }
         }
 
-        public void AttackHero(Hero hero)
+        public void AttackHero(Hero hero, SoundPlayer damage)
         {
             if (_isAttackCooldown)
                 return;
@@ -119,6 +120,7 @@ namespace Fourth_wall.Game_Objects
                 if (Math.Sqrt(x * x + y * y) <= _atcRange + 
                     (hero.Collider.Width + hero.Collider.Height + Collider.Width + Collider.Height)/4)
                 {
+                    damage.Play();
                     hero.HpRemove();
                     _isAttackCooldown = true;
                     Task.Run(async () =>
