@@ -52,6 +52,8 @@ namespace Fourth_wall
             
             _hitSound = new SoundPlayer(@"..\..\Resources\Sounds\Hit.wav");
             _explosionSound = new SoundPlayer(@"..\..\Resources\Sounds\Explosion.wav");
+            _deathSound = new SoundPlayer(@"..\..\Resources\Sounds\Death.wav");
+            _chestSound = new SoundPlayer(@"..\..\Resources\Sounds\Chest.wav");
         }
 
         #endregion
@@ -71,5 +73,7 @@ namespace Fourth_wall
 
         private SoundPlayer _hitSound;
         private SoundPlayer _explosionSound;
+        private SoundPlayer _deathSound;
+        private SoundPlayer _chestSound;
     }
 }

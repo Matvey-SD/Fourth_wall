@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Fourth_wall.Game_Objects
 {
@@ -12,29 +11,13 @@ namespace Fourth_wall.Game_Objects
         public bool IsDestroyed { get; private set; }
 
         #region Constructor
-        public DestructibleObject(Point location, Size collider, int hp ) : base(location)
-        {
-            _hp = hp;
-            Collider = collider;
-        }
-        
-        public DestructibleObject(Point location, int width, int height, int hp) : base(location)
-        {
-            _hp = hp;
-            Collider = new Size(width, height);
-        }
-        
-        public DestructibleObject(int x, int y, Size collider, int hp) : base(x, y)
-        {
-            _hp = hp;
-            Collider = collider;
-        }
         
         public DestructibleObject(int x, int y, int width, int height, int hp) : base(x, y)
         {
             _hp = hp;
             Collider = new Size(width, height);
         }
+        
         #endregion
 
         public bool IsPointInside(Point point)

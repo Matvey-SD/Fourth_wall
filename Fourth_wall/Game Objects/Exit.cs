@@ -11,18 +11,9 @@ namespace Fourth_wall.Game_Objects
 
         #region Constructor
         
-        public Exit(Point location, Location nextMap) : base(location)
-        {
-            NextMap = nextMap;
-        }
-
         public Exit(int x, int y, Location nextMap) : base(x, y)
         {
             NextMap = nextMap;
-        }
-        
-        public Exit(Point location) : base(location)
-        {
         }
 
         public Exit(int x, int y) : base(x, y)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace Fourth_wall.Game_Objects
 {
@@ -12,20 +11,20 @@ namespace Fourth_wall.Game_Objects
         
         private int MaxHp => 15;
         private int MaxStamina => 200;
-        public bool CanRegenStamina { get; private set; } = false;
+        private bool CanRegenStamina { get; set; }
         private int _staminaTimer;
         public int Hp { get; private set; }
         public int Stamina { get; private set; }
         private readonly int _damage;
         public int DamageBoost { get; private set; }
         private readonly int _range;
-        public int Speed { get; private set;}
+        public int Speed { get; }
         public bool IsDead;
         public Directions LastDirection = Directions.Right;
         public readonly Size Collider = new Size(19, 19);
-        public bool IsAttackCooldown;
+        private bool _isAttackCooldown;
         public bool IsAttackAnimation { get; private set; }
-        public bool CanAttack => !IsAttackCooldown && Stamina >= 50;
+        public bool CanAttack => !_isAttackCooldown && Stamina >= 50;
 
         public Point MiddlePoint => new Point(Location.X + Collider.Height / 2, Location.Y + Collider.Width / 2);
         private int FullDamage => _damage + DamageBoost;
@@ -99,7 +98,7 @@ namespace Fourth_wall.Game_Objects
                     enemy.HpChange(FullDamage);
             }
             
-            IsAttackCooldown = true;
+            _isAttackCooldown = true;
             IsAttackAnimation = true;
             
             Task.Run(async () =>
@@ -107,7 +106,7 @@ namespace Fourth_wall.Game_Objects
                 await Task.Delay(500);
                 IsAttackAnimation = false;
                 await Task.Delay(500);
-                IsAttackCooldown = false;
+                _isAttackCooldown = false;
             });
         }
         

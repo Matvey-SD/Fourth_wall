@@ -9,25 +9,12 @@ namespace Fourth_wall.Game_Objects
         private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
 
         #region Constructor
-        public Wall(Point location, Size collider) : base(location)
-        {
-            Collider = collider;
-        }
-        
-        public Wall(Point location, int width, int height) : base(location)
-        {
-            Collider = new Size(width, height);
-        }
-        
-        public Wall(int x, int y, Size collider) : base(x, y)
-        {
-            Collider = collider;
-        }
-        
+
         public Wall(int x, int y, int width, int height) : base(x, y)
         {
             Collider = new Size(width, height);
         }
+        
         #endregion
 
         public bool IsPointInside(Point point)

@@ -9,7 +9,7 @@ namespace Fourth_wall.Game_Objects
     {
         public EnemyType Type { get; }
         private int _hp;
-        public int Speed { get; private set;}
+        public int Speed { get; }
         private readonly int _fov = 100;
         private readonly int _atcRange = 15;
         public bool IsTriggered { get; private set; }
@@ -21,21 +21,7 @@ namespace Fourth_wall.Game_Objects
         private Point OppositeCorner => new Point(Location.X + Collider.Width, Location.Y + Collider.Height);
 
         #region Constructor
-        public Enemy(Point location, int hp, EnemyType type) : base(location)
-        {
-            _hp = hp;
-            Type = type;
-            switch (type)
-            {
-                case EnemyType.Light:
-                    Speed = 2;
-                    break;
-                case EnemyType.Heavy:
-                    Speed = 1;
-                    break;
-            }
-        }
-
+        
         public Enemy(int x, int y, int hp, EnemyType type) : base(x, y)
         {
             _hp = hp;
@@ -56,6 +42,7 @@ namespace Fourth_wall.Game_Objects
                     break;
             }
         }
+        
         #endregion
         
         public IEnumerable<Point> ColliderBorders()

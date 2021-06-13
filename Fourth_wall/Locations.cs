@@ -10,9 +10,9 @@ namespace Fourth_wall
         {
             var enemies = new List<Enemy>()
             {
-                Enemies.CreateLightEnemy(450, 75), 
+                /*Enemies.CreateLightEnemy(450, 75), 
                 Enemies.CreateLightEnemy(450, 150), 
-                Enemies.CreateLightEnemy(450, 220)
+                Enemies.CreateLightEnemy(450, 220)*/
             };
             
             var walls = new List<Wall>()

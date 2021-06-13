@@ -246,6 +246,7 @@ namespace Fourth_wall
         {
             if (!_location.IsChestOpened && _location.CanOpenChest())
             {
+                _chestSound.PlaySync();
                 _location.IsChestOpened = true;
                 _isPaused = true;
                 var result = MessageBox.Show(Resources.ChestOpen_Message, Resources.OpenChest, MessageBoxButtons.YesNo, MessageBoxIcon.Question,
@@ -286,6 +287,7 @@ namespace Fourth_wall
         {
             if (_location.Hero.IsDead)
             {
+                _deathSound.Play();
                 _isPaused = true;
                 var result = MessageBox.Show(Resources.DeathMessage, Resources.GameEnd, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (result == DialogResult.OK)
